@@ -2,12 +2,27 @@ from django.db import models
 from django.conf import settings
 
 
+
+class CategoryManager(models.Manager):
+	def get_by_natural_key(self, name,id):
+		return self.get(id=id,name=name)
+
+class ProjectManager(models.Manager):
+	def get_by_natural_key(self, name,title):
+		return self.get(id=id,name=title)
+
 class Category(models.Model):
 	name = models.CharField(max_length=140)
 	# projects = models.ManyToManyField(Project, related_name='categories')
 
 	def __str__(self):
 		return self.name
+
+	def natural_key(self):
+		return (self.id, self.name)
+
+	class Meta:
+		unique_together = (('name', 'id'),)
 
 
 class Project(models.Model):
@@ -23,9 +38,16 @@ class Project(models.Model):
 	def __str__(self):
 		return self.title
 
+	def natural_key(self):
+		return (self.id, self.title)
+
+	class Meta:
+		unique_together = (('title', 'id'),)
+
 
 class Comment(models.Model):
 	""" Modelo para review en base de datos """
+
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='reviews')
 	project = models.ForeignKey(Project, related_name='reviews')
 	comment = models.TextField()

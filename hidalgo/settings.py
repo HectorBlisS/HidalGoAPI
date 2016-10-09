@@ -39,11 +39,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'projects',
+    'corsheaders',
+
 ]
 
-MIDDLEWARE = [
+
+MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    # CORS_OHEADERS
+    'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -56,7 +61,7 @@ ROOT_URLCONF = 'hidalgo.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR,'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -125,4 +130,14 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR,'static'),)
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR,'media')
+
+
+
+CORS_ORIGIN_ALLOW_ALL = True
+
+# Para serializar relaciones
+# SERIALIZATION_MODULES = {
+#     'json': 'wadofstuff.django.serializers.json'
+# }
+
 
