@@ -13,12 +13,12 @@ class Category(models.Model):
 class Project(models.Model):
 	""" Modelo para Projecto en Base de datos """
 	title = models.CharField(max_length=140)
-	slug = models.SlugField()
-	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='projects')
+	slug = models.SlugField(blank=True,null=True)
+	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='projects',blank=True,null=True)
 	img = models.ImageField(blank=True,null=True,upload_to="projects/%Y/%m/%d/images")
 	desc = models.TextField(blank=True,null=True)
 	votes = models.IntegerField(default=0)
-	categories = models.ManyToManyField(Category,related_name='projects')
+	categories = models.ManyToManyField(Category,related_name='projects',blank=True)
 
 	def __str__(self):
 		return self.title
