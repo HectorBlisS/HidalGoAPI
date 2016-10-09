@@ -10,6 +10,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 
 import json
+from django.forms.models import model_to_dict
 
 class ProjectListView(View):
 	@method_decorator(csrf_exempt)
@@ -48,6 +49,11 @@ class ProjectListView(View):
 
 
 class ProjectDetailView(View):
+	@method_decorator(csrf_exempt)
+	def dispatch(self, request, *args, **kwargs):
+		return super(ProjectDetailView, self).dispatch(request, *args, **kwargs)
+
+
 	def get(self,request,id):
 		# id=request.GET.get('id')
 		print('estas en detail')
@@ -60,6 +66,14 @@ class ProjectDetailView(View):
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
 		print(data)
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+
+
+
+	def put(self,request,id):
+		project = get_object_or_404(Project,pk=id)
+		dic = model_to_dict(project)
+		for key,val in dic.items():
+			print(project.get(key))
 
 
 class ProjectCreateView(View):

@@ -15,6 +15,7 @@ class UsersListView(View):
 	@method_decorator(csrf_exempt)
 	def dispatch(self, request, *args, **kwargs):
 		return super(UsersListView, self).dispatch(request, *args, **kwargs)
+
 	def get(self,request):
 		users = User.objects.all()
 		# cosa = list(Category.objects.all())+[project]
@@ -42,6 +43,19 @@ class UsersListView(View):
 
 class UserDetailView(View):
 	def get(self,request,id):
+
+		try:
+			isProfile = request.GET.get('isProfile')
+			if isProfile:
+				user = get_object_or_404(User,id=id)
+				data = serializers.serialize('json',[user.profile],indent=2,
+			use_natural_foreign_keys=True, use_natural_primary_keys=False)
+				print(data)
+				return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+
+		except:
+			pass
+
 		try:
 			user = get_object_or_404(User,id=id)
 		except:
@@ -50,3 +64,7 @@ class UserDetailView(View):
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
 		print(data)
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+
+
+
+
