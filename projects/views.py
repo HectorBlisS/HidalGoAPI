@@ -70,10 +70,16 @@ class ProjectDetailView(View):
 
 
 	def put(self,request,id):
-		project = get_object_or_404(Project,pk=id)
-		dic = model_to_dict(project)
-		for key,val in dic.items():
-			print(project.get(key))
+		try:
+			test1 = request.body.decode("utf-8") 
+			test2 = json.loads(test1)
+			project = get_object_or_404(Project,pk=id)
+			project.title = test2['title']
+			project.slug = slugify(project.title)
+			project.save()
+			return HttpResponse('Chingon!')
+		except:
+			return HttpResponse('No Guardado')
 
 
 class ProjectCreateView(View):
