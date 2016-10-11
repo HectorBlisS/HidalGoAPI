@@ -20,13 +20,20 @@ class ProjectListView(View):
 
 	def get(self, request):
 		category = request.GET.get('category')
-		paginate = request.GET.get('paginate')
+		# paginate = request.GET.get('paginate')
+		user_id = request.GET.get('user_id')
+		if(user_id):
+			projects = Project.objects.filter(uid=user_id)
+			data = serializers.serialize('json',projects,indent=2,
+			use_natural_foreign_keys=True, use_natural_primary_keys=False)
+
+			return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 		try:
 			projects = Category.objects.get(name=category).projects.all()
 		except:
 			projects = Project.objects.all()
-		if paginate:
-			projects = projects[:int(paginate)]
+		# if paginate:
+		# 	projects = projects[:int(paginate)]
 
 		data = serializers.serialize('json',projects,indent=2,
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
@@ -41,6 +48,7 @@ class ProjectListView(View):
 
 			new_project = Project()
 			new_project.title = test2['title']
+			new_project.eje = test2['eje']
 			new_project.user = get_object_or_404(User,username="bliss")
 			new_project.uid = test2['uid']
 			new_project.save()
