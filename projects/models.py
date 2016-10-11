@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 
 
-
 class CategoryManager(models.Manager):
 	def get_by_natural_key(self, name,id):
 		return self.get(id=id,name=name)
@@ -28,6 +27,8 @@ class Category(models.Model):
 class Project(models.Model):
 	""" Modelo para Projecto en Base de datos """
 	title = models.CharField(max_length=140)
+	uid = models.CharField(max_length=140,blank=True,null=True)
+	eje = models.CharField(max_length=140,null=True,blank=True)
 	slug = models.SlugField(blank=True,null=True)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='projects',blank=True,null=True)
 	img = models.ImageField(blank=True,null=True,upload_to="projects/%Y/%m/%d/images")

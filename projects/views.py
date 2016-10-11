@@ -41,7 +41,8 @@ class ProjectListView(View):
 
 			new_project = Project()
 			new_project.title = test2['title']
-			new_project.user = get_object_or_404(User,username=test2.get('username'))
+			new_project.user = get_object_or_404(User,username="bliss")
+			new_project.uid = test2['uid']
 			new_project.save()
 		except:
 			return HttpResponseBadRequest('No se guardo')
