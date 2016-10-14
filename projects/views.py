@@ -80,8 +80,8 @@ class ProjectDetailView(View):
 
 	def put(self,request,id):
 		try:
-			# test1 = request.body.decode("utf-8") 
-			# test2 = json.loads(test1)
+			test1 = request.body.decode("utf-8") 
+			test2 = json.loads(test1)
 
 			project = get_object_or_404(Project,pk=id)
 
@@ -90,7 +90,7 @@ class ProjectDetailView(View):
 			# project.eje = test2['eje']
 			# project.slug = slugify(project.title)
 			# # project.img = test2['img']
-			# project.objetivo_general = test2['objetivo_general']
+			project.objetivo_general = test2['objetivo_general']
 			# project.indicador = test2['indicador']
 			# project.planteamiento = test2['planteamiento']
 			# project.problematica = test2['problematica']
@@ -98,7 +98,7 @@ class ProjectDetailView(View):
 			# # project.votes = test2['votes']
 			# # project.categories = test2['categories']
 			# # project.anexo = test2['anexo']
-			# project.save()
+			project.save()
 			
 
 			return HttpResponse('Guarado con éxito!')
