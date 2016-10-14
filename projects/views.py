@@ -60,9 +60,9 @@ class ProjectListView(View):
 			# # new_project.user = get_object_or_404(User,username="bliss")
 			# new_project.uid = test2['uid']
 			# new_project.save()
+			return HttpResponse('Guardado con Exito')
 		except:
 			return HttpResponseBadRequest('No se guardo')
-		return HttpResponse('Guardado con Exito')
 
 
 class ProjectDetailView(View):
