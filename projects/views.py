@@ -12,6 +12,9 @@ from django.utils.decorators import method_decorator
 import json
 from django.forms.models import model_to_dict
 
+
+from .forms import ProjectForm
+
 class ProjectListView(View):
 	@method_decorator(csrf_exempt)
 	def dispatch(self, request, *args, **kwargs):
@@ -42,16 +45,21 @@ class ProjectListView(View):
 	
 	def post(self,request):
 		try:
-		# 	#convertimos los bytes que llegan de angular en diccionario
-			test1 = request.body.decode("utf-8") 
-			test2 = json.loads(test1)
 
-			new_project = Project()
-			new_project.title = test2['title']
-			new_project.eje = test2['eje']
-			# new_project.user = get_object_or_404(User,username="bliss")
-			new_project.uid = test2['uid']
-			new_project.save()
+			form = ProjectForm(request.POST)
+			if form.is_valid():
+				form.save()
+
+		# 	#convertimos los bytes que llegan de angular en diccionario
+			# test1 = request.body.decode("utf-8") 
+			# test2 = json.loads(test1)
+
+			# new_project = Project()
+			# new_project.title = test2['title']
+			# new_project.eje = test2['eje']
+			# # new_project.user = get_object_or_404(User,username="bliss")
+			# new_project.uid = test2['uid']
+			# new_project.save()
 		except:
 			return HttpResponseBadRequest('No se guardo')
 		return HttpResponse('Guardado con Exito')
@@ -79,32 +87,50 @@ class ProjectDetailView(View):
 
 
 	def post(self,request,id):
-		# test1 = request.body.decode("utf-8") 
-		# data = json.loads(test1)
-		# print(test2['objetivo_general'])
-		print(request.POST.get('objetivo_general'))
+
+		form = ProjectForm(request.POST,request.FILES)
+
+		if form.is_valid():
+			form.save()
+
 		try:
+			# form = ProjectForm(request.POST, request.FILES)
+			# # cd = form.cleaned_data
+			# print(form)
+			# form.save()
+
+		# # test1 = request.body.decode("utf-8") 
+		# # data = json.loads(test1)
+		# # print(test2['objetivo_general'])
+		# print(request.POST.get('objetivo_general'))
+		# print(request.POST.get('file'))
+		# print(request.FILES)
+		# # print(request.POST)
+		# try:
 
 
-			project = get_object_or_404(Project,pk=id)
+		# 	project = get_object_or_404(Project,pk=id)
 
-			# project.title = test2['title']
-			# project.uid = test2['uid']
-			# project.eje = test2['eje']
-			# project.slug = slugify(project.title)
-			# # project.img = test2['img']
-			# project.objetivo_general = test2['objetivo_general']
+		# 	# project.title = test2['title']
+		# 	# project.uid = test2['uid']
+		# 	# project.eje = test2['eje']
+		# 	# project.slug = slugify(project.title)
+		# 	# # project.img = test2['img']
+		# 	# project.objetivo_general = test2['objetivo_general']
 			
-			project.objetivo_general = request.POST.get('objetivo_general')
+		# 	project.objetivo_general = request.POST.get('objetivo_general')
 
-			project.indicador = request.POST.get('indicador')
-			project.planteamiento = request.POST.get('planteamiento')
-			project.problematica = request.POST.get('problematica')
-			project.municipio = request.POST.get('municipio')
-			# project.votes = request.POST.get('votes')
-			# project.categories = request.POST.get('categories')
-			# project.anexo = test2['anexo']
-			project.save()
+		# 	project.indicador = request.POST.get('indicador')
+		# 	project.planteamiento = request.POST.get('planteamiento')
+		# 	project.problematica = request.POST.get('problematica')
+		# 	project.municipio = request.POST.get('municipio')
+		# 	# project.img = request.FILES
+		# 	# print(request.FILES)
+
+		# 	# project.votes = request.POST.get('votes')
+		# 	# project.categories = request.POST.get('categories')
+		# 	# project.anexo = test2['anexo']
+		# 	project.save()
 
 
 			return HttpResponse('Guarado con éxito!')
