@@ -49,7 +49,7 @@ class ProjectListView(View):
 			new_project = Project()
 			new_project.title = test2['title']
 			new_project.eje = test2['eje']
-			new_project.user = get_object_or_404(User,username="bliss")
+			# new_project.user = get_object_or_404(User,username="bliss")
 			new_project.uid = test2['uid']
 			new_project.save()
 		except:
@@ -82,11 +82,25 @@ class ProjectDetailView(View):
 		try:
 			test1 = request.body.decode("utf-8") 
 			test2 = json.loads(test1)
+
 			project = get_object_or_404(Project,pk=id)
+
 			project.title = test2['title']
+			project.uid = test2['uid']
+			project.eje = test2['eje']
 			project.slug = slugify(project.title)
+			# project.img = test2['img']
+			project.objetivo_general = test2['objetivo_general']
+			project.indicador = test2['indicador']
+			project.planteamiento = test2['planteamiento']
+			project.problematica = test2['problematica']
+			project.municipio = test2['municipio']
+			# project.votes = test2['votes']
+			# project.categories = test2['categories']
+			# project.anexo = test2['anexo']
 			project.save()
-			return HttpResponse('Chingon!')
+
+			return HttpResponse('Guarado con éxito!')
 		except:
 			return HttpResponse('No Guardado')
 
