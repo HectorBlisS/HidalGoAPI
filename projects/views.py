@@ -88,7 +88,8 @@ class ProjectDetailView(View):
 
 	def post(self,request,id):
 
-		form = ProjectForm(request.POST,request.FILES)
+		project = get_object_or_404(Project,id)
+		form = ProjectForm(request.POST,request.FILES,instance=project)
 
 		if form.is_valid():
 			form.save()
