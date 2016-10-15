@@ -34,6 +34,8 @@ class Project(models.Model):
 	img = models.ImageField(blank=True,null=True,upload_to="projects/%Y/%m/%d/images")
 	imagen = models.CharField(max_length=500 ,blank=True,null=True)
 	laRef = models.CharField(max_length=140,blank=True,null=True)
+	archivo = models.CharField(max_length=500 ,blank=True,null=True)
+	fileRef = models.CharField(max_length=140,blank=True,null=True)
 	objetivo_general = models.TextField(blank=True,null=True)
 	indicador = models.CharField(max_length=140,blank=True,null=True)
 	planteamiento = models.TextField(blank=True,null=True)
