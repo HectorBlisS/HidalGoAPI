@@ -32,6 +32,7 @@ class Project(models.Model):
 	slug = models.SlugField(blank=True,null=True)
 	# user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='projects',blank=True,null=True)
 	img = models.ImageField(blank=True,null=True,upload_to="projects/%Y/%m/%d/images")
+	imagen = models.CharField(max_length=500 ,blank=True,null=True)
 	objetivo_general = models.TextField(blank=True,null=True)
 	indicador = models.CharField(max_length=140,blank=True,null=True)
 	planteamiento = models.TextField(blank=True,null=True)
