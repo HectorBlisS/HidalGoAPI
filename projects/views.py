@@ -87,51 +87,12 @@ class ProjectDetailView(View):
 
 
 	def post(self,request,id):
-
-		project = get_object_or_404(Project,id)
-		form = ProjectForm(request.POST,request.FILES,instance=project)
-
-		if form.is_valid():
-			form.save()
-
 		try:
-			# form = ProjectForm(request.POST, request.FILES)
-			# # cd = form.cleaned_data
-			# print(form)
-			# form.save()
+			project = get_object_or_404(Project,id=id)
+			form = ProjectForm(request.POST,request.FILES,instance=project)
 
-		# # test1 = request.body.decode("utf-8") 
-		# # data = json.loads(test1)
-		# # print(test2['objetivo_general'])
-		# print(request.POST.get('objetivo_general'))
-		# print(request.POST.get('file'))
-		# print(request.FILES)
-		# # print(request.POST)
-		# try:
-
-
-		# 	project = get_object_or_404(Project,pk=id)
-
-		# 	# project.title = test2['title']
-		# 	# project.uid = test2['uid']
-		# 	# project.eje = test2['eje']
-		# 	# project.slug = slugify(project.title)
-		# 	# # project.img = test2['img']
-		# 	# project.objetivo_general = test2['objetivo_general']
-			
-		# 	project.objetivo_general = request.POST.get('objetivo_general')
-
-		# 	project.indicador = request.POST.get('indicador')
-		# 	project.planteamiento = request.POST.get('planteamiento')
-		# 	project.problematica = request.POST.get('problematica')
-		# 	project.municipio = request.POST.get('municipio')
-		# 	# project.img = request.FILES
-		# 	# print(request.FILES)
-
-		# 	# project.votes = request.POST.get('votes')
-		# 	# project.categories = request.POST.get('categories')
-		# 	# project.anexo = test2['anexo']
-		# 	project.save()
+			if form.is_valid():
+				form.save()
 
 
 			return HttpResponse('Guarado con éxito!')
