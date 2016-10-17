@@ -1,0 +1,42 @@
+{%load static%}
+<html>
+<head>
+	<title>{%block titulo%}Fixter.org{%endblock titulo%}</title>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.5.2/animate.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	{# mis estilos #}
+	<link rel="stylesheet" type="text/css" href="{%static 'css/bliss.css'%}">
+</head>
+<body>
+
+{%block header%}
+<div class="jumbotron" style="text-align:center">
+  <h1>Plan Estata de Desarrollo 2016-2022</h1>
+  <p>Sistema de captura 1.0</p>
+  <p><a class="btn btn-warning btn-lg" href="{%url 'login'%}" role="button">
+  	Inciar Sesión
+  </a></p>
+</div>
+{%endblock header%}
+
+
+	{%block content%}
+	{%endblock content%}
+
+
+
+
+
+
+
+
+<script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+{%block scripts%}
+{%endblock scripts%}
+</body>
+</html>

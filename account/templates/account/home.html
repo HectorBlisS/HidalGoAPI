@@ -1,0 +1,30 @@
+{%extends 'base2.html'%}
+
+{%block contenido%}
+<section class="container">
+	<article class="row">
+
+	<h1>Dashboard</h1>
+
+<div class="list-group col-sm-4">
+  <a href="#" class="list-group-item active">
+    Tus proyectos dados de alta
+  </a>
+  {%for p in projects%}
+  <a href="#!" class="list-group-item">{{p.title}}</a>
+  {%empty%}
+  <div class="alert alert-warning" role="alert">
+  	Aún no haz dado de alta ninguno. ¡apresurate!
+  </div>
+  {%endfor%}
+
+</div>
+
+
+	</article>
+</section>
+{%endblock contenido%}
+
+
+{%block escripts%}
+{%endblock escripts%}

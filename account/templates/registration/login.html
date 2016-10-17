@@ -1,0 +1,49 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block titulo%}Acceso al sistema{%endblock titulo%}
+
+
+{%block content%}
+
+<section style="text-align:center" class="container">
+
+<article class="row">
+
+<h1>Acceso al sistema de captura avanzada</h1>
+{%if form.errors%}
+	<p>Tu usuario y contraseña no coinciden</p>
+	<p>Intenta nuevamente...</p>
+
+{%else%}
+
+<p>Introduce tu usuario y contraseña</p>
+
+
+{%endif%}
+
+<div class="input-group col-xs-12 col-md-4 col-md-offset-4">
+
+	<form action="{%url 'login'%}" method="post">
+		{%csrf_token%}
+		{{form.as_p}}
+		<input type="hidden" name="next" value="{{next}}">
+		<br>
+		<br>
+		<input type="submit" value="Entrar" class="btn btn-lg btn-success">
+	</form>
+
+</div>
+
+
+
+</article>
+</section>
+{%endblock content%}
+
+
+{%block scripts%}
+<script>
+	$('#id_username,#id_password').addClass('form-control');
+</script>
+	
+{%endblock scripts%}

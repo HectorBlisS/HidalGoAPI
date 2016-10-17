@@ -31,7 +31,7 @@ ALLOWED_HOSTS = ["*"]
 # Application definition
 
 INSTALLED_APPS = [
-    'accounts',
+    'account',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'projects',
     'corsheaders',
+    'capturista',
 
 ]
 
@@ -120,7 +121,10 @@ USE_L10N = True
 
 USE_TZ = True
 
-
+from django.core.urlresolvers import reverse_lazy
+LOGIN_REDIRECT_URL = reverse_lazy('dashboard')
+LOGIN_URL = reverse_lazy('login')
+LOGOUT_URL = reverse_lazy('logout')
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.10/howto/static-files/
 
