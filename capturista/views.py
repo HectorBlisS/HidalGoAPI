@@ -12,10 +12,12 @@ class Alta(View):
 	@method_decorator(login_required)
 	def get(self,request):
 		template_name = 'capturista/home.html'
+		projects = request.user.projects.all()
 		form = ProjectForm();
 		context = {
 			'section':'alta',
-			'form':form
+			'form':form,
+			'num_projects':projects.count()
 		}
 		return render(request,template_name,context)
 
