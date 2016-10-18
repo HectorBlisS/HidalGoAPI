@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponseBadRequest
 from .models import Project,Comment,Category 
 from django.core import serializers
@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.contrib.auth.decorators import login_required
 
 import json
 from django.forms.models import model_to_dict
@@ -70,7 +71,7 @@ class ProjectDetailView(View):
 	def dispatch(self, request, *args, **kwargs):
 		return super(ProjectDetailView, self).dispatch(request, *args, **kwargs)
 
-
+	@method_decorator(login_required)
 	def get(self,request,id):
 		# id=request.GET.get('id')
 		template_name="projects/detail.html"
@@ -102,12 +103,19 @@ class ProjectDetailView(View):
 			form = ProjectForm(request.POST,request.FILES,instance=project)
 
 			if form.is_valid():
-				form.save()
+				pro = form.save(commit=False)
+				pro.save()
+				messages.success(request,"Proyecto guardado con éxito")
 
+			else:
+				context = {
+				'form':form
+				}
 
-			return HttpResponse('Guarado con éxito!')
 		except:
-			return HttpResponseBadRequest('No Guardado')
+			pass
+		return redirect('projects:detail', id=id)
+
 
 
 class ProjectCreateView(View):
