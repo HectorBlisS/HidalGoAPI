@@ -100,8 +100,24 @@
 {%endblock content%}
 
 {%block scripts%}
+<!--Añadiendo firebase-->
+<script src="https://www.gstatic.com/firebasejs/3.5.0/firebase.js"></script>
 <script>
-
+  // Initialize Firebase
+  var config = {
+    apiKey: "AIzaSyAnF8mq6Qyxsh9N6s-TdOUH9EpwOxr8jKw",
+    authDomain: "hidalgo-f65ba.firebaseapp.com",
+    databaseURL: "https://hidalgo-f65ba.firebaseio.com",
+    storageBucket: "hidalgo-f65ba.appspot.com",
+    messagingSenderId: "821336519111"
+  };
+  firebase.initializeApp(config);
+  //Referencia a base de datos
+  firebase.auth().signOut().then(function() {
+    console.log("Cerrar sesion");
+  });
+</script>
+<script>
 $('#ham').on('click',function(){
 	$('.admin-panel').toggleClass('esconde');
 	// $('.work-panel').toggleClass('esconde');
@@ -114,13 +130,73 @@ $('input, textarea').addClass('form-control')
 <script>
 
 $('#guardar').click(function(){
-  $( "#newProject" ).submit();
-  console.log('rata')
+
+  if( $('#id_uid').val() != '' && $('#id_title').val() != ''){
+      $( "#newProject" ).submit();
+      console.log('rata');
+  }
+  else if($('#id_udi').val() == ''){
+    alert('No puedes avanzar sin tener UID');
+  }
+
+  else if($('#id_title').val() == ''){
+    alert("Debes tener un titulo para registrarte");
+  }
 });
+
+  $('#actualizar').click(function(){
+    if($('#id_title').val() != ''){
+      $('#newProject').submit();
+      console.log("rata");
+    }
+    else if($('#id_title').val() == ''){
+      alert("El proyecto debe tener un título.");
+    }
+  });
+
+
+
+$('#generarUID').click(function(){
+  if ($('#id_password').val() == $('#id_password_again').val()){
+    console.log("Sirve");
+    firebase.auth().createUserWithEmailAndPassword($('#id_email').val(), $('#id_password').val()).catch(function(error) {
+          var errorCode = error.code;
+          var errorMessage = error.message;
+          console.log("Se creo");
+        });
+    firebase.auth().onAuthStateChanged(function(user) {
+      if (user) {
+        console.log("Ya estoy aqui", user['uid']);
+        $('#id_uid').val(user['uid']);
+        $('#id_email, #id_password, #id_password_again').attr('readonly',true);
+        $('#generarUID').toggle();
+        $('#guardar').css({"display":"inline-block"});
+        var database = firebase.database();
+        var users = database.ref('users');
+        users.push({
+          email: $('#id_email').val(),
+          UID: $('#id_uid').val()
+        });
+      } else { 
+        console.log("no estoy aqui");
+      }
+});
+
+  }
+  else{
+    alert("Las contraseñas no coinciden");
+  }
+});
+
+$('#id_uid').attr('readonly',true);
+$('#guardar').toggle();
 
 
 
 </script>
 {%endblock scripts%}
+
+
 {%block escripts%}
+
 {%endblock escripts%}

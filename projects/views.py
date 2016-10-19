@@ -1,4 +1,4 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponseBadRequest
 from .models import Project,Comment,Category 
 from django.core import serializers
@@ -8,7 +8,11 @@ from django.contrib.auth.models import User
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+<<<<<<< HEAD
 from django.views.decorators.csrf import ensure_csrf_cookie
+=======
+from django.contrib.auth.decorators import login_required
+>>>>>>> 5f06f670a5f1d02b24ae5ab272dc411cd584a5ad
 
 import json
 from django.forms.models import model_to_dict
@@ -102,9 +106,10 @@ class ProjectDetailView(View):
 	def dispatch(self, request, *args, **kwargs):
 		return super(ProjectDetailView, self).dispatch(request, *args, **kwargs)
 
-
+	@method_decorator(login_required)
 	def get(self,request,id):
 		# id=request.GET.get('id')
+		template_name="projects/detail.html"
 		print('estas en detail')
 		try:
 			project = get_object_or_404(Project,pk=id)
@@ -113,8 +118,17 @@ class ProjectDetailView(View):
 		# cosa = list(Category.objects.all())+[project]
 		data = serializers.serialize('json',[project],indent=2,
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
+		projects = request.user.projects.all()
+		form = ProjectForm(instance=project)
+		context = {
+		'form':form,
+		'num_projects':projects.count()
+
+		}
 		print(data)
-		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+		return render(request,template_name,context)
+		
+		#return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
 
 
@@ -124,12 +138,19 @@ class ProjectDetailView(View):
 			form = ProjectForm(request.POST,request.FILES,instance=project)
 
 			if form.is_valid():
-				form.save()
+				pro = form.save(commit=False)
+				pro.save()
+				messages.success(request,"Proyecto guardado con éxito")
 
+			else:
+				context = {
+				'form':form
+				}
 
-			return HttpResponse('Guarado con éxito!')
 		except:
-			return HttpResponseBadRequest('No Guardado')
+			pass
+		return redirect('projects:detail', id=id)
+
 
 
 class ProjectCreateView(View):
