@@ -8,12 +8,44 @@ from django.contrib.auth.models import User
 
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import ensure_csrf_cookie
 
 import json
 from django.forms.models import model_to_dict
 
 
 from .forms import ProjectForm
+
+class Test(View):
+	@method_decorator(ensure_csrf_cookie)
+	def get(self,request):
+		return HttpResponse('El get si sirve')
+
+	def post(self,request):
+		return HttpResponse('Lo lograstes!')
+
+
+from django.views.decorators.http import require_POST
+@require_POST
+@ensure_csrf_cookie
+def test(request):
+	return HttpResponse('Listo mijo!')
+
+from django.views.decorators.csrf import csrf_protect
+
+
+@ensure_csrf_cookie
+# @csrf_exempt
+def test_post(request):
+	if request.method == "POST":
+		return HttpResponse('Entraste al post')
+	else:
+		return HttpResponse('Entraste al get')
+
+
+
+
+
 
 class ProjectListView(View):
 	@method_decorator(csrf_exempt)

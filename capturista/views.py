@@ -13,9 +13,11 @@ class Alta(View):
 	def get(self,request):
 		template_name = 'capturista/home.html'
 		form = ProjectForm();
+		# user_form = UserForm()
 		context = {
 			'section':'alta',
-			'form':form
+			'form':form,
+			'num_projects':request.user.projects.all().count()
 		}
 		return render(request,template_name,context)
 
@@ -25,6 +27,7 @@ class Alta(View):
 		if form.is_valid():
 			pro = form.save(commit=False)
 			pro.user = request.user
+			pro.imagen = "http://hidalgo.fixter.org"+pro.img.url
 			pro.save()
 			
 		else:
