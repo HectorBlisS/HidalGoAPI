@@ -26,12 +26,14 @@
   
   </li>
 </a>
-<li class="anchito {% if section == '' %}active{%endif%}" type="button">
-  Alta de usuario <span class="badge"></span>
+<a href="{%url 'captura:lista'%}">
+<li class="anchito {% if section == 'lista' %}active{%endif%}" type="button">
+  Todos los proyectos <span class="badge"></span>
 </li>
-<li class="anchito {% if section == '' %}active{%endif%}" type="button">
+</a>
+<!-- <li class="anchito {% if section == '' %}active{%endif%}" type="button">
   Comentarios <span class="badge"></span>
-</li>
+</li> -->
 
 </ol>
 
@@ -159,10 +161,25 @@ $('#guardar').click(function(){
 $('#generarUID').click(function(){
   if ($('#id_password').val() == $('#id_password_again').val()){
     console.log("Sirve");
-    firebase.auth().createUserWithEmailAndPassword($('#id_email').val(), $('#id_password').val()).catch(function(error) {
+    firebase.auth().createUserWithEmailAndPassword($('#id_email').val(), $('#id_password').val())
+      .then(function(res){
+        console.log(res)
+      })
+      .catch(function(error) {
           var errorCode = error.code;
           var errorMessage = error.message;
-          console.log("Se creo");
+          alert(errorMessage);
+          if (errorMessage === "The email address is already in use by another account."){
+            firebase.auth().signInWithEmailAndPassword($('#id_email').val(), $('#id_password').val())
+            .catch(function(error) {
+              // Handle Errors here.
+              var errorCode = error.code;
+              var errorMessage = error.message;
+              alert(errorMessage);
+              // ...
+            });
+          }
+          
         });
     firebase.auth().onAuthStateChanged(function(user) {
       if (user) {

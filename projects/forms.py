@@ -22,3 +22,21 @@ class ProfileForm(forms.ModelForm):
 			raise forms.ValidationError('Las contraseñas no coinciden')
 		return cd['password_again']
 		
+
+class EditProyectForm(forms.ModelForm):
+	class Meta:
+		model = Project
+		fields = [
+			'title',
+			'uid',
+			'eje',
+			'img',
+			'objetivo_general',
+			'indicador',
+			'planteamiento',
+			'municipio',
+			'problematica',
+			'img',
+			'imagen',
+			'anexo'
+		]

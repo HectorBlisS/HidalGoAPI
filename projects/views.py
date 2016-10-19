@@ -6,13 +6,10 @@ from django.views.generic import View
 from django.utils.text import slugify
 from django.contrib.auth.models import User
 
-from django.views.decorators.csrf import csrf_exempt
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
 from django.utils.decorators import method_decorator
-<<<<<<< HEAD
-from django.views.decorators.csrf import ensure_csrf_cookie
-=======
+
 from django.contrib.auth.decorators import login_required
->>>>>>> 5f06f670a5f1d02b24ae5ab272dc411cd584a5ad
 
 import json
 from django.forms.models import model_to_dict

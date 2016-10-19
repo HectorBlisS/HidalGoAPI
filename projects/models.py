@@ -45,6 +45,7 @@ class Project(models.Model):
 	categories = models.ManyToManyField(Category,related_name='projects',blank=True,null=True)
 	anexo = models.FileField(blank=True,null=True)
 	cerrado = models.BooleanField(default=False)
+	anexo = models.FileField(blank=True,null=True ,upload_to="projects/%Y/%m/%d/archivos")
 
 	
 	def __str__(self):
