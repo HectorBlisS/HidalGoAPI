@@ -14,6 +14,7 @@ class Alta(View):
 	@method_decorator(login_required)
 	def get(self,request):
 		template_name = 'capturista/home.html'
+		projects_all = Project.objects.all().count()
 		projects = request.user.projects.all()
 		form = ProjectForm();
 		form2 = ProfileForm();
@@ -21,7 +22,8 @@ class Alta(View):
 			'section':'alta',
 			'form':form,
 			'form2':form2,
-			'num_projects':projects.count()
+			'num_projects':projects.count(),
+			'num_projects_all':projects_all
 
 		}
 		return render(request,template_name,context)
@@ -31,6 +33,7 @@ class Alta(View):
 		form = ProjectForm(request.POST,request.FILES)
 		form2 = ProfileForm(request.POST, request.FILES)
 		projects = request.user.projects.all()
+		projects_all = Project.objects.all().count()
 		template_name = 'capturista/home.html'
 		if form.is_valid():
 			pro = form.save(commit=False)
@@ -40,7 +43,8 @@ class Alta(View):
 			messages.success(request,"Proyecto guardado con éxito")
 			context = {
 				'section':'alta',
-				'num_projects':projects.count()
+				'num_projects':projects.count(),
+				'num_projects_all':projects_all
 			}
 			
 			
@@ -49,7 +53,8 @@ class Alta(View):
 			'section':'alta',
 			'form':form,
 			'form2':form2,
-			'num_projects':projects.count()
+			'num_projects':projects.count(),
+			'num_projects_all':projects_all
 			}
 			return render(request,template_name,context)
 
@@ -89,10 +94,14 @@ class Revisar(View):
 class Lista(View):
 	def get(self,request):
 		projects = Project.objects.all()
+		num_projects_all = projects.count()
+		num_projects = request.user.projects.all()
 		template_name = "capturista/lista.html"
 		context = {
 		'section':'lista',
-		'projects':projects
+		'projects':projects,
+		'num_projects':num_projects.count(),
+		'num_projects_all':num_projects_all
 		}
 		return render(request,template_name,context)
 		

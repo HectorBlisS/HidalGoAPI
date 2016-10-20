@@ -28,7 +28,7 @@
 </a>
 <a href="{%url 'captura:lista'%}">
 <li class="anchito {% if section == 'lista' %}active{%endif%}" type="button">
-  Todos los proyectos <span class="badge"></span>
+  Todos los proyectos <span class="badge">{{num_projects_all}}</span>
 </li>
 </a>
 <!-- <li class="anchito {% if section == '' %}active{%endif%}" type="button">
@@ -171,6 +171,7 @@ $('#generarUID').click(function(){
           alert(errorMessage);
           if (errorMessage === "The email address is already in use by another account."){
             firebase.auth().signInWithEmailAndPassword($('#id_email').val(), $('#id_password').val())
+            
             .catch(function(error) {
               // Handle Errors here.
               var errorCode = error.code;

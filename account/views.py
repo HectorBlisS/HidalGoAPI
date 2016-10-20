@@ -6,7 +6,7 @@ from django.views.generic import View
 # from django.utils.text import slugify
 from django.contrib.auth.models import User
 from .models import Profile
-
+from projects.models import Project
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -18,11 +18,13 @@ class Dashboard(View):
 	@method_decorator(login_required)
 	def get(self,request):
 		template_name = 'account/home.html'
+		projects_all = Project.objects.all().count()
 		projects = request.user.projects.all()
 		context = {
 			'section':'dashboard',
 			'projects':projects,
-			'num_projects':projects.count()
+			'num_projects':projects.count(),
+			'num_projects_all':projects_all
 		}
 		return render(request,template_name,context)
 
