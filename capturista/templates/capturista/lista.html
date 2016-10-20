@@ -16,7 +16,7 @@
 
 <div class="list-group">
     {%for p in projects%}
-    <a href="#" class="list-group-item list-group-item-success">
+    <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-success">
       {{p.title}} - {{p.uid}}
     </a>
   {%empty%}
