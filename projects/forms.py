@@ -6,7 +6,7 @@ from account.models import Profile
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Project
-		fields = ['title','uid','eje','img','objetivo_general','indicador','planteamiento','municipio','problematica','imagen','laRef','archivo','fileRef','cerrado']
+		fields = ['title','uid','eje','img','objetivo_general','indicador','planteamiento','municipio','problematica','imagen','laRef','archivo','fileRef','cerrado','alcance']
 
 
 class ProfileForm(forms.ModelForm):
