@@ -157,12 +157,12 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 # CSRF_COOKIE_HTTPONLY = True
 
-CORS_ORIGIN_WHITELIST = [
+# CORS_ORIGIN_WHITELIST = [
     
-     'planestataldedesarrollo.hidalgo.gob.mx',
-     'localhost'
+#      'planestataldedesarrollo.hidalgo.gob.mx',
+#      'localhost'
     
- ]
+#  ]
 
 # CORS_ALLOW_HEADERS = (
 # 'x-requested-with',
