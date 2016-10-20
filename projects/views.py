@@ -103,7 +103,6 @@ class ProjectDetailView(View):
 	def dispatch(self, request, *args, **kwargs):
 		return super(ProjectDetailView, self).dispatch(request, *args, **kwargs)
 
-	@method_decorator(login_required)
 	def get(self,request,id):
 		# id=request.GET.get('id')
 		# template_name="projects/detail.html"
