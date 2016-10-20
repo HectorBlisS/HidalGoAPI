@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(1hm@)p5unn1xapl+a0f*%v(3)t3l&ari_#qcbsygmw-mwq^fp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
 
@@ -160,6 +160,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 CORS_ORIGIN_WHITELIST = [
     
      'planestataldedesarrollo.hidalgo.gob.mx',
+     'localhost'
     
  ]
 
