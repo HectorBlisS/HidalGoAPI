@@ -153,16 +153,16 @@ MEDIA_ROOT = os.path.join(BASE_DIR,'media')
 
 
 
-CORS_ORIGIN_ALLOW_ALL = True
+CORS_ORIGIN_ALLOW_ALL = False
 
 # CSRF_COOKIE_HTTPONLY = True
 
-# CORS_ORIGIN_WHITELIST = [
+CORS_ORIGIN_WHITELIST = [
     
-#     'ped.hidalgo.gob.mx',
-#     'http://localhost:3000'
+     'planestataldedesarrollo.hidalgo.gob.mx',
+     # 'http://localhost:3000'
     
-# ]
+ ]
 
 CORS_ALLOW_HEADERS = (
 'x-requested-with',
