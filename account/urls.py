@@ -15,6 +15,9 @@ urlpatterns = [
 	# url(r'^',
 	# 	views.UsersListView.as_view(),
 	# 	name="list"),
+	url(r'^save/$',
+		views.SaveProfile.as_view(),
+		name="save_profile"),
 
 	url(r'^login/$',
 		djangoViews.login,

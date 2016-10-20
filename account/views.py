@@ -11,6 +11,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from .forms import ProfileForm
 # from .forms import LoginForm
 
 
@@ -30,6 +31,43 @@ class Dashboard(View):
 
 
 
+class SaveProfile(View):
+	@method_decorator(csrf_exempt)
+	def dispatch(self, request, *args, **kwargs):
+		return super(SaveProfile, self).dispatch(request, *args, **kwargs)
+
+	def post(self,request):
+		try:
+			uid = request.POST.get('uid')
+			profile = get_object_or_404(Profile,uid=uid)
+			form = ProfileForm(request.POST,instance=profile)
+			if form.is_valid():
+				form.save()
+				return HttpResponse('Guardado')
+		except:
+			form = ProfileForm(request.POST)
+			if form.is_valid():
+				form.save()
+				return HttpResponse('Creado')
+		# except:
+		# 	profile = Profile.objects.create(uid=uid)
+		# 	return HttpResponse('creado',profile)
+
+
+		# # try:
+		# profile = get_object_or_404(Profile,uid=request.POST.get('uid'))
+		# form = ProfileForm(request.POST,request.FILES,instance=profile)
+		# if form.is_valid():
+		# 	form.save()
+		# 	return HttpResponse('Guardado, OK')
+		# # except:
+		# 	# try:
+		# form = ProfileForm(request.POST)
+		# if form.is_valid():
+		# 	form.save()
+		# 	return HttpResponse('Guardado, OK')
+		# 	# except:
+		# 	# 	return HttpResponseBadRequest('No se guardo, BAD')
 
 
 
