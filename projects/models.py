@@ -41,6 +41,7 @@ class Project(models.Model):
 	planteamiento = models.TextField(blank=True,null=True)
 	problematica = models.TextField(blank=True,null=True)
 	municipio = models.CharField(max_length=140,blank=True,null=True)
+	alcance = models.CharField(max_length=140,blank=True,null=True)
 	votes = models.IntegerField(default=0)
 	categories = models.ManyToManyField(Category,related_name='projects',blank=True,null=True)
 	anexo = models.FileField(blank=True,null=True)
