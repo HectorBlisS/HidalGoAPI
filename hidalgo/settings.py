@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '(1hm@)p5unn1xapl+a0f*%v(3)t3l&ari_#qcbsygmw-mwq^fp'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = ["*"]
 
@@ -81,12 +81,28 @@ WSGI_APPLICATION = 'hidalgo.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/1.10/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+# Database
+# https://docs.djangoproject.com/en/1.10/ref/settings/#databases
+
+if DEBUG:
+
+    DATABASES = {
+       'default': {
+           'ENGINE': 'django.db.backends.sqlite3',
+           'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+       }
     }
-}
+else:
+    DATABASES = {
+        'default':{
+            'ENGINE': 'django.db.backends.postgresql_psycopg2',
+            'NAME':'ped',
+            'USER':'adminped',
+            'PASSWORD':'adminPed@',
+            'HOST':'localhost',
+            'PORT':'',
+        }
+    }
 
 
 # Password validation
