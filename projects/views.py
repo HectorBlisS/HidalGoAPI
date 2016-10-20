@@ -106,8 +106,8 @@ class ProjectDetailView(View):
 	@method_decorator(login_required)
 	def get(self,request,id):
 		# id=request.GET.get('id')
-		template_name="projects/detail.html"
-		print('estas en detail')
+		# template_name="projects/detail.html"
+		# print('estas en detail')
 		try:
 			project = get_object_or_404(Project,pk=id)
 		except:
@@ -115,17 +115,17 @@ class ProjectDetailView(View):
 		# cosa = list(Category.objects.all())+[project]
 		data = serializers.serialize('json',[project],indent=2,
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
-		projects = request.user.projects.all()
-		form = ProjectForm(instance=project)
-		context = {
-		'form':form,
-		'num_projects':projects.count()
+		# projects = request.user.projects.all()
+		# form = ProjectForm(instance=project)
+		# context = {
+		# 'form':form,
+		# 'num_projects':projects.count()
 
-		}
-		print(data)
-		return render(request,template_name,context)
+		# }
+		# print(data)
+		# return render(request,template_name,context)
 		
-		#return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
 
 
@@ -137,16 +137,12 @@ class ProjectDetailView(View):
 			if form.is_valid():
 				pro = form.save(commit=False)
 				pro.save()
-				messages.success(request,"Proyecto guardado con éxito")
-
-			else:
-				context = {
-				'form':form
-				}
-
+				# messages.success(request,"Proyecto guardado con éxito")
+				return HttpResponse('Guardado con exito')
 		except:
-			pass
-		return redirect('projects:detail', id=id)
+			return HttpResponseBadRequest('No se guardo')
+			# pass
+		# return redirect('projects:detail', id=id)
 
 
 
