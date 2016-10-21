@@ -38,7 +38,7 @@ class Alta(View):
 		if form.is_valid():
 			pro = form.save(commit=False)
 			pro.user = request.user
-			pro.imagen = "http://hidalgo.fixter.org"+pro.img.url
+			pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url
 			pro.save()
 			messages.success(request,"Proyecto guardado con éxito")
 			context = {
