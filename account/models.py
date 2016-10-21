@@ -19,7 +19,7 @@ class Profile(models.Model):
 	edad = models.CharField(max_length=140 ,blank=True,null=True)
 	displayName = models.CharField(max_length=140,blank=True,null=True)
 	photoURL = models.CharField(max_length=140,blank=True,null=True)
-	ocupacion = models.CharField(max_length=140,choices=TIPOS_USERS,default="ciudadano",blank=True,null=True)
+	ocupacion = models.CharField(max_length=140,blank=True,null=True)
 	telefono = models.CharField(max_length=140,blank=True,null=True)
 	uid = models.CharField(max_length=140,blank=True,null=True)
 	password = models.CharField(max_length=140,blank=True,null=True)
