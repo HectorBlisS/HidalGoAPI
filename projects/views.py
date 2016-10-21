@@ -67,7 +67,7 @@ class ProjectListView(View):
 		try:
 			projects = Category.objects.get(name=category).projects.all()
 		except:
-			projects = Project.objects.all()
+			projects = Project.objects.all().filter(cerrado=True)
 		# if paginate:
 		# 	projects = projects[:int(paginate)]
 
