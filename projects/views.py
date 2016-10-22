@@ -49,9 +49,9 @@ def test_post(request):
 
 
 class ProjectListView(View):
-	@method_decorator(csrf_exempt)
-	def dispatch(self, request, *args, **kwargs):
-		return super(ProjectListView, self).dispatch(request, *args, **kwargs)
+	# @method_decorator(csrf_exempt)
+	# def dispatch(self, request, *args, **kwargs):
+	# 	return super(ProjectListView, self).dispatch(request, *args, **kwargs)
 
 
 	def get(self, request):
@@ -132,8 +132,7 @@ class ProjectDetailView(View):
 			form = ProjectForm(request.POST,request.FILES,instance=project)
 
 			if form.is_valid():
-				pro = form.save(commit=False)
-				pro.save()
+				form.save()
 				# messages.success(request,"Proyecto guardado con éxito")
 				return HttpResponse('Guardado con exito')
 			return HttpResponseBadRequest('No se guardó')
