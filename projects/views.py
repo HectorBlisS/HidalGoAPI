@@ -126,8 +126,6 @@ class ProjectDetailView(View):
 		
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
-
-
 	def post(self,request,id):
 		try:
 			project = get_object_or_404(Project,id=id)
@@ -138,6 +136,7 @@ class ProjectDetailView(View):
 				pro.save()
 				# messages.success(request,"Proyecto guardado con éxito")
 				return HttpResponse('Guardado con exito')
+			return HttpResponseBadRequest('No se guardó')
 		except:
 			return HttpResponseBadRequest('No se guardo')
 			# pass
