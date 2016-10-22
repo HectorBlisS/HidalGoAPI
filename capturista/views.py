@@ -38,7 +38,8 @@ class Alta(View):
 		if form.is_valid():
 			pro = form.save(commit=False)
 			pro.user = request.user
-			pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url
+			if pro.img:
+				pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url
 			pro.save()
 			messages.success(request,"Proyecto guardado con éxito")
 			context = {
@@ -80,7 +81,10 @@ class Revisar(View):
 		project = get_object_or_404(Project,id=id)
 		form = EditProyectForm(request.POST,request.FILES,instance=project)
 		if form.is_valid():
-			form.save()
+			pro = form.save(commit=False)
+			if pro.img:
+				pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url 
+			pro.save()
 			messages.success(request,'Proyecto editado y guardado con éxito')
 			return redirect('captura:editar',id=id)
 		else:
