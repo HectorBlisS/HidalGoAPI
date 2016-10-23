@@ -31,7 +31,7 @@ class Project(models.Model):
 	eje = models.CharField(max_length=140,null=True,blank=True)
 	slug = models.SlugField(blank=True,null=True)
 	user = models.ForeignKey(settings.AUTH_USER_MODEL, related_name='projects',blank=True,null=True)
-	img = models.ImageField(blank=True,null=True,upload_to="projects/%Y/%m/%d/images")
+	img = models.ImageField(blank=True,null=True)
 	imagen = models.CharField(max_length=500 ,blank=True,null=True)
 	laRef = models.CharField(max_length=140,blank=True,null=True)
 	archivo = models.CharField(max_length=500 ,blank=True,null=True)
@@ -46,7 +46,7 @@ class Project(models.Model):
 	categories = models.ManyToManyField(Category,related_name='projects',blank=True,null=True)
 	anexo = models.FileField(blank=True,null=True)
 	cerrado = models.BooleanField(default=False)
-	anexo = models.FileField(blank=True,null=True ,upload_to="projects/%Y/%m/%d/archivos")
+	anexo = models.FileField(blank=True,null=True )
 
 	
 	def __str__(self):

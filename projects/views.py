@@ -1,52 +1,21 @@
-from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
+from django.shortcuts import get_object_or_404, HttpResponse
 from django.http import HttpResponseBadRequest
-from .models import Project,Comment,Category 
+from .models import Project,Category
 from django.core import serializers
 from django.views.generic import View
 from django.utils.text import slugify
-from django.contrib.auth.models import User
+# from django.contrib.auth.models import User
 
-from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-from django.utils.decorators import method_decorator
+# from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+# from django.utils.decorators import method_decorator
 
-from django.contrib.auth.decorators import login_required
+# from django.contrib.auth.decorators import login_required
 
 import json
-from django.forms.models import model_to_dict
+# from django.forms.models import model_to_dict
 
 
 from .forms import ProjectForm
-
-class Test(View):
-	@method_decorator(ensure_csrf_cookie)
-	def get(self,request):
-		return HttpResponse('El get si sirve')
-
-	def post(self,request):
-		return HttpResponse('Lo lograstes!')
-
-
-from django.views.decorators.http import require_POST
-@require_POST
-@ensure_csrf_cookie
-def test(request):
-	return HttpResponse('Listo mijo!')
-
-from django.views.decorators.csrf import csrf_protect
-
-
-@ensure_csrf_cookie
-# @csrf_exempt
-def test_post(request):
-	if request.method == "POST":
-		return HttpResponse('Entraste al post')
-	else:
-		return HttpResponse('Entraste al get')
-
-
-
-
-
 
 class ProjectListView(View):
 	# @method_decorator(csrf_exempt)
@@ -127,23 +96,21 @@ class ProjectDetailView(View):
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
 	def post(self,request,id):
-		project = get_object_or_404(Project,id=id)
-		form = ProjectForm(data=request.POST,files=request.FILES,instance=project)
-		o = form.save(commit=False)
-		print(o)
-		print(request.POST)
-		print(request.FILES)
-		print(request.POST.get('img'))
 		try:
-			
-
+			project = get_object_or_404(Project,id=id)
+			form = ProjectForm(data=request.POST,files=request.FILES,instance=project)
 			if form.is_valid():
-				form.save()
+				pro = form.save(commit=False)
+				if pro.img:
+					pro.imagen = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.img.url)
+				if pro.anexo:
+					pro.archivo = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.anexo.url)
+				pro.save()
 				# messages.success(request,"Proyecto guardado con éxito")
 				return HttpResponse('Guardado con exito')
-			return HttpResponseBadRequest('No se guardó')
+			return HttpResponseBadRequest('Formulario no valido, no se guardó')
 		except:
-			return HttpResponseBadRequest('No se guardo')
+			return HttpResponseBadRequest('Error, no se guardó')
 			# pass
 		# return redirect('projects:detail', id=id)
 
@@ -189,23 +156,6 @@ class Reviews(View):
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 		
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-def binary_to_dict(the_binary):
-    jsn = ''.join(chr(int(x, 2)) for x in the_binary.split())
-    d = json.loads(jsn)  
-    return d
 
 
 
