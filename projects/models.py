@@ -47,6 +47,7 @@ class Project(models.Model):
 	anexo = models.FileField(blank=True,null=True)
 	cerrado = models.BooleanField(default=False)
 	anexo = models.FileField(blank=True,null=True )
+	foro = models.CharField(max_length=140,blank=True,null=True)
 
 	
 	def __str__(self):
