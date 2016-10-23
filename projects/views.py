@@ -42,7 +42,7 @@ class ProjectListView(View):
 
 		data = serializers.serialize('json',projects,indent=2,
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
-		print(category)
+		# print(category)
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 	
 	def post(self,request):
