@@ -22,7 +22,7 @@ class ProjectListView(View):
 	# def dispatch(self, request, *args, **kwargs):
 	# 	return super(ProjectListView, self).dispatch(request, *args, **kwargs)
 
-
+	@method_decorator(ensure_csrf_cookie)
 	def get(self, request):
 		category = request.GET.get('category')
 		# paginate = request.GET.get('paginate')
