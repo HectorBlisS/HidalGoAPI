@@ -68,10 +68,6 @@ class ProjectListView(View):
 
 
 class ProjectDetailView(View):
-	# @method_decorator(csrf_exempt)
-	# def dispatch(self, request, *args, **kwargs):
-	# 	return super(ProjectDetailView, self).dispatch(request, *args, **kwargs)
-
 	def get(self,request,id):
 		# id=request.GET.get('id')
 		# template_name="projects/detail.html"

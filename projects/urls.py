@@ -4,10 +4,6 @@ from . import views
 
 urlpatterns = [
 
-#Listing adn Create Category
-	url(r'^(?P<id>\d+)/reviews/$',
-		views.Reviews.as_view(),
-			name="reviews_list"),
 
 #Listing adn Create Category
 	url(r'^categories/$',
@@ -22,6 +18,11 @@ urlpatterns = [
 	url(r'^',
 		views.ProjectListView.as_view(),
 			name="list"),
+
+#Listing adn Create Category
+	url(r'^(?P<id>\d+)/reviews/$',
+		views.Reviews.as_view(),
+			name="reviews_list"),
 
 
 
