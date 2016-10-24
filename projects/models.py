@@ -37,7 +37,7 @@ class Project(models.Model):
 	archivo = models.CharField(max_length=500 ,blank=True,null=True)
 	fileRef = models.CharField(max_length=140,blank=True,null=True)
 	objetivo_general = models.TextField(blank=True,null=True)
-	indicador = models.CharField(max_length=140,blank=True,null=True)
+	indicador = models.CharField(max_length=500,blank=True,null=True)
 	planteamiento = models.TextField(blank=True,null=True)
 	problematica = models.TextField(blank=True,null=True)
 	municipio = models.CharField(max_length=140,blank=True,null=True)

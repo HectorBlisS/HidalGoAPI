@@ -96,21 +96,21 @@ class ProjectDetailView(View):
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
 	def post(self,request,id):
-		# try:
-		project = get_object_or_404(Project,id=id)
-		form = ProjectForm(data=request.POST,files=request.FILES,instance=project)
-		if form.is_valid():
-			pro = form.save(commit=False)
-			if pro.img:
-				pro.imagen = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.img.url)
-			if pro.anexo:
-				pro.archivo = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.anexo.url)
-			pro.save()
-			# messages.success(request,"Proyecto guardado con éxito")
-			return HttpResponse('Guardado con exito')
-		return HttpResponseBadRequest('Formulario no valido, no se guardó')
-	# except:
-		return HttpResponseBadRequest('Error, no se guardó')
+		try:
+			project = get_object_or_404(Project,id=id)
+			form = ProjectForm(data=request.POST,files=request.FILES,instance=project)
+			if form.is_valid():
+				pro = form.save(commit=False)
+				if pro.img:
+					pro.imagen = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.img.url)
+				if pro.anexo:
+					pro.archivo = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(pro.anexo.url)
+				pro.save()
+				# messages.success(request,"Proyecto guardado con éxito")
+				return HttpResponse('Guardado con exito')
+			return HttpResponseBadRequest('Formulario no valido, no se guardó')
+		except:
+			return HttpResponseBadRequest('Error, no se guardó')
 			# pass
 		# return redirect('projects:detail', id=id)
 
