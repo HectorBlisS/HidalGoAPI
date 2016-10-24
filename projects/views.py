@@ -6,8 +6,8 @@ from django.views.generic import View
 from django.utils.text import slugify
 # from django.contrib.auth.models import User
 
-# from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
-# from django.utils.decorators import method_decorator
+from django.views.decorators.csrf import csrf_exempt, ensure_csrf_cookie
+from django.utils.decorators import method_decorator
 
 # from django.contrib.auth.decorators import login_required
 
@@ -18,9 +18,9 @@ import json
 from .forms import ProjectForm
 
 class ProjectListView(View):
-	# @method_decorator(csrf_exempt)
-	# def dispatch(self, request, *args, **kwargs):
-	# 	return super(ProjectListView, self).dispatch(request, *args, **kwargs)
+	@method_decorator(csrf_exempt)
+	def dispatch(self, request, *args, **kwargs):
+		return super(ProjectListView, self).dispatch(request, *args, **kwargs)
 
 
 	def get(self, request):
