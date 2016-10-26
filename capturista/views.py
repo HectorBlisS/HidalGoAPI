@@ -25,6 +25,7 @@ class Alta(View):
 		return render(request,template_name,context)
 
 	def post(self,request):
+		url = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'
 		projects = request.user.projects.all()
 		template_name = 'capturista/home.html'
 		# Capturamos los datos
@@ -37,20 +38,33 @@ class Alta(View):
 		np.problematica = request.POST.get('problematica')
 		np.alcance = request.POST.get('alcance')
 		np.municipio = request.POST.get('municipio')
+		if not request.POST.get('titulo'):
+			messages.error(request,"Debes poner un titulo al proyecto")
+			return redirect('captura:alta')
 		np.title = request.POST.get('titulo')
 		np.objetivo_general = request.POST.get('objetivo')
 		np.planteamiento = request.POST.get('planteamiento')
 		np.indicador = request.POST.get('indicador')
+		np.autor_name = request.POST.get('autor_name')
+		np.autor_tel = request.POST.get('autor_tel')
+		np.autor_correo = request.POST.get('autor_correo')
+		np.agree = request.POST.get('agree')
+
 		if request.POST.get('indicador2'):
 			np.indicador = request.POST.get('indicador2')
 		np.save()
 		form = FilesForm(request.POST,request.FILES,instance=np)
 		form.save()
 		if np.img:
-			np.imagen = np.img.url
+			np.imagen = url+np.img.url
 		if np.anexo:
-			np.archivo = np.anexo.url
+			np.archivo = url+np.anexo.url
 		np.save()
+		# Checamos si es un eje nuevo
+		if request.POST.get('justificacion_eje') or request.POST.get('justificacion_indicador'):
+			np.justi_eje = request.POST.get('justificacion_eje')
+			np.justi_indicador = request.POST.get('justificacion_indicador')
+			np.save()
 
 		context = {
 			'section':'alta',

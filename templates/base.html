@@ -15,14 +15,35 @@
 
 {%block header%}
 <div class="jumbotron" style="text-align:center">
+
+{%if request.user.is_authenticated%}
+<h2>PED - Sistema de captura 1.0</h2>
+
+<div style="">
+	<a href="#!" class="btn btn-lg btn-danger">Alta de Proyecto</a>
+	<a href="#!" class="btn btn-lg btn-danger">Dashboard</a>
+	<a href="#!" class="btn btn-lg btn-danger">Todos los proyectos</a>
+	
+</div>
+
+{%else%}
+
   <h1>Plan Estatal de Desarrollo 2016-2022</h1>
   <p>Sistema de captura 1.0</p>
   <p><a class="btn btn-warning btn-lg" href="{%url 'login'%}" role="button">
   	Inciar Sesión
   </a></p>
+{%endif%}
 </div>
 {%endblock header%}
 
+{%if messages%}
+{%for message in messages%}
+<div style="text-align:center" class="alert alert-{%if message.tags == 'error'%}danger{%else%}{{message.tags}}{%endif%}" role="alert">
+	{{message}}
+</div>
+{%endfor%}
+{%endif%}
 
 	{%block content%}
 	{%endblock content%}
@@ -33,6 +54,7 @@
 
 
 
+<div class="loading"></div>
 
 <script src="http://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>

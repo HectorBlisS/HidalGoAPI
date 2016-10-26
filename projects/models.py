@@ -25,7 +25,7 @@ class Category(models.Model):
 
 
 class Project(models.Model):
-	""" Modelo para Projecto en Base de datos """
+	""" Modelo para Proyecto en Base de datos """
 	title = models.CharField(max_length=140)
 	uid = models.CharField(max_length=140,blank=True,null=True)
 	eje = models.CharField(max_length=140,null=True,blank=True)
@@ -48,8 +48,14 @@ class Project(models.Model):
 	cerrado = models.BooleanField(default=False)
 	anexo = models.FileField(blank=True,null=True )
 	foro = models.CharField(max_length=140,blank=True,null=True)
+	justi_eje = models.TextField(blank=True,null=True)
+	justi_indicador = models.TextField(blank=True,null=True)
+	autor_name = models.CharField(max_length=140 ,blank=True,null=True)
+	autor_tel = models.CharField(max_length=140,blank=True,null=True)
+	autor_correo = models.CharField(max_length=140,blank=True,null=True)
+	agree = models.BooleanField(default=True)
 
-	
+
 	def __str__(self):
 		return self.title
 

@@ -1,4 +1,4 @@
-{%extends 'base2.html'%}
+{%extends 'base.html'%}
 {%load static%}
 {%block titulo%}Captura de proyectos{%endblock titulo%}
 
@@ -39,10 +39,12 @@
 {%csrf_token%}
 <div class="row">
 
-  <div class="col-sm-6">
+  <div class="col-sm-12 well">
 
+<p>
     <label>
-      <h3>Foro</h3> ¿Formas parte de algún foro presencial?
+      <h3><i class="fa fa-users" aria-hidden="true"></i>Foro</h3> 
+      ¿Formas parte de algún foro presencial?
       <select name="foro" class="form-control">
         <option value="No">No</option>
         <option value="Huejutla">Huejutla</option>
@@ -52,9 +54,20 @@
         <option value="Tula">Tula</option>
       </select>  
     </label>
-    <br>
+</p>
+<p>
     <label>
-      <h3>Eje</h3>
+      <h3><i class="fa fa-lightbulb-o" aria-hidden="true"></i>
+        Titulo</h3>
+      ¿Cual es el titulo del proyecto?
+      <input name="titulo" class="input-lg form-control">
+    </label>
+</p>
+<p>
+    <label>
+      <h3>
+        <i class="fa fa-arrows" aria-hidden="true"></i>
+        Eje</h3>
       ¿a que eje pertenece?
       <select id="eje" name="eje" class="form-control" >
         <option value="Gobierno Honesto Cercano y Moderno" >Gobierno Honesto Cercano y Moderno</option>
@@ -64,22 +77,50 @@
         <option value="Un Hidalgo con Desarrollo Sustentable">Un Hidalgo con Desarrollo Sustentable</option>
 
       </select>
-      <input class="input-lg" id="nuevoeje" type="text" name="eje2">
+      <p id="nuevoeje">
+      <input placeholder="¿Qué nombre tiene de tu eje?" class="input-lg"  type="text" name="eje2">
+      <br>
+      <textarea class="input-lg" name="justificacion_eje" placeholder="¿en qué consiste tu indicador?"></textarea>
+      </p>
     </label>
-    <br>
+</p>
+
+<p>
     <label>
       Nuevo eje
             <input id="neje" type="checkbox" name="my-checkbox">
     </label>
-    <br>
+</p>
+<p>
     <label>
-      <h3>Problematica</h3>
+      <h3>Objetivo General</h3>
+      ¿Cual es el objetivo del proyecto?
+      <textarea rows="6" cols="30" name="objetivo" class="form-control"></textarea>
+    </label>
+</p>
+<p>
+    <label>
+      <h3>
+        <i class="fa fa-exclamation" aria-hidden="true"></i>
+        Problematica</h3>
       ¿Qué problemática resuelve?
       <textarea name="problematica" class="form-control" rows="6" cols="30"></textarea>
     </label>
-    <br>
+</p>
+<p>
     <label>
-      <h3>Alcance</h3>
+      <h3>
+        <i class="fa fa-tasks" aria-hidden="true"></i>
+        Planteamiento</h3>
+      ¿En qué consiste el proyecto?
+      <textarea name="planteamiento" class="form-control" rows="6" cols="30"></textarea>
+    </label>
+</p>
+<p>
+    <label>
+      <h3>
+        <i class="fa fa-crosshairs" aria-hidden="true"></i>
+        Alcance</h3>
       ¿A qué nivel geográfico impacta el proyecto?
       <select name="alcance" class="form-control">
         <option value="otro">Otro</option>
@@ -88,10 +129,54 @@
         <option value="otro">Metropolitano</option>
       </select>
     </label>
-    <br>
+</p>
+<p>
     <label>
-      <h3>Municipio</h3>
-      ¿En qué municipio vives?
+      <h3>
+        <i class="fa fa-check-square" aria-hidden="true"></i>
+        Indicador</h3>
+      ¿Con qué indicador se podría medir el resultado de tu propuesta?
+      <select id="indicador" name="indicador" class="form-control required" >
+         <option value="">Selecciona una opción</option>
+         <option  value='Tasa de Prevalencia de Corrupción (INEGI)'>Tasa de Prevalencia de Corrupción (INEGI)</option>
+         <option  value='Proporción de la población que se sintió satisfecha o muy satisfecha en la realización de trámites y solicitudes de servicios con alguna dependencia estatal (INEGI)'>Proporción de la población que se sintió satisfecha o muy satisfecha en la realización de trámites y solicitudes de servicios con alguna dependencia estatal (INEGI)</option>
+         <option  value='Porcentaje de trámites y servicios públicos del tipo transaccional que se ofrecen en línea en la Administración Pública Estatal (INEGI)'>Porcentaje de trámites y servicios públicos del tipo transaccional que se ofrecen en línea en la Administración Pública Estatal (INEGI)</option>
+         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población en condición de pobreza</option>
+         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por acceso a los servicios de salud</option>
+         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por rezago educativo</option>
+         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por calidad y espacios de la vivienda</option>
+         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)</option>
+         <option value='Proporción de alumnos en el nivel insuficiente  de competencias matemáticas y de comprensión lectora para sexto  grado de primaria y tercer año de secundaria'>Proporción de alumnos en el nivel insuficiente  de competencias matemáticas y de comprensión lectora para sexto  grado de primaria y tercer año de secundaria</option>
+         <option value='Tasa de informalidad laboral'>Tasa de informalidad laboral</option>
+         <option value='Tasa de personas de 18 años y más que considera inseguro su municipio '>Tasa de personas de 18 años y más que considera inseguro su municipio </option>
+         <option  value='Tasa de prevalencia delictiva'>Tasa de prevalencia delictiva</option>
+         <option  value='Tasa de crecimiento anual del PIB per cápita (INEGI)'>Tasa de crecimiento anual del PIB per cápita (INEGI)</option>
+         <option  value='Porcentaje de hogares con conectividad a internet (INEGI)'>Porcentaje de hogares con conectividad a internet (INEGI)</option>
+         <option  value='Porcentaje de Usuarios con acceso a internet en el Estado de Hidalgo (INEGI)'>Porcentaje de Usuarios con acceso a internet en el Estado de Hidalgo (INEGI)</option>
+         <option  value='Unidades Económicas del Sector Privado y Paraestatal que efectuaron actividades de innovación en el Estado de Hidalgo (INEGI)'>Unidades Económicas del Sector Privado y Paraestatal que efectuaron actividades de innovación en el Estado de Hidalgo (INEGI)</option>
+         <option value='Volumen tratado de aguas residuales'>Volumen tratado de aguas residuales</option>
+         <option value='Superficie de áreas naturales con acciones de conservación y/o aprovechamiento de competencia federal, estatal y municipal (INEGI)'>Superficie de áreas naturales con acciones de conservación y/o aprovechamiento de competencia federal, estatal y municipal (INEGI)</option>
+         <option value='Porcentaje de Residuos Sólidos Urbanos (RSU) y de Manejo Especial (RME) con manejo adecuado (INEGI)'>* Porcentaje de Residuos Sólidos Urbanos (RSU) y de Manejo Especial (RME) con manejo adecuado (INEGI)</option>
+     </select>
+    </label>
+</p>
+<p id="nuevoindicador">
+    <input placeholder="Nombre del indicador" class="input-lg" name="indicador2" type="text" >
+    <br>
+    <textarea class="input-lg" name="justificacion_indicador" placeholder="¿en qué consiste tu indicador?"></textarea>
+</p>
+<p>
+    <label>
+      Nuevo indicador
+      <input id="nindicador" type="checkbox">
+    </label>
+</p>
+<p>
+    <label>
+      <h3>
+        <i class="fa fa-map-marker" aria-hidden="true"></i>
+        Municipio</h3>
+      ¿A que municipio pertenece el proyecto?
       <select name="municipio" required class="form-control">
         <option value=""></option>
         <option value="Acatlán">Acatlán</option>
@@ -180,70 +265,58 @@
         <option value="Zimapán">Zimapán</option>
     </select>
     </label>
-    <br>
+</p>
+<p>
+  <label>
+    <h3>
+      <i class="fa fa-user-plus" aria-hidden="true"></i>
+
+      Nombre del autor</h3>
+    ¿Cual es el nombre completo del autor del proyecto?
+    <input name="autor_name" type="text" class="form-control">
+  </label>
+</p>
+<p>
+  <label>
+    <h3>
+      <i class="fa fa-mobile" aria-hidden="true"></i>
+      Teléfono del autor</h3>
+    ¿Cual es el teléfono del autor del proyecto?
+    <input name="autor_tel" type="text" class="form-control">
+  </label>
+</p>
+<p>
+  <label>
+    <h3>
+     <i class="fa fa-envelope" aria-hidden="true"></i>
+      Email del autor</h3>
+    ¿Cual es el correo electrónico del autor del proyecto?
+    <input name="autor_correo" type="text" class="form-control">
+  </label>
+</p>
+<p>
+  <label>
+    <h3>
+     <i class="fa fa-info-circle" aria-hidden="true"></i>
+     Mostrar el nombre del autor en el sitio web
+      </h3>
+    ¿El autor autoriza mostrar su nombre en el proyecto?
+    <select name="agree" class="form-control">
+      <option value="True">Si</option>
+      <option value="False">No</option>
+    </select>
+  </label>
+</p>
+<!--   </div>
+
+  <div class="col-sm-6"> -->
+
+<br><br>
     {{form.as_p}}
 
-    
 
 
-  </div>
-
-  <div class="col-sm-6">
-
-    <label>
-      <h3>Titulo</h3>
-      ¿Cual es el titulo del proyecto?
-      <input name="titulo" class="input-lg form-control">
-    </label>
-    <br>
-    <label>
-      <h3>Objetivo General</h3>
-      ¿Cual es el objetivo del proyecto?
-      <textarea rows="6" cols="30" name="objetivo" class="form-control"></textarea>
-    </label>
-    <br>
-    <label>
-      <h3>Planteamiento</h3>
-      ¿En qué consiste el proyecto?
-      <textarea name="planteamiento" class="form-control" rows="6" cols="30"></textarea>
-    </label>
-    <br>
-    <label>
-      <h3>Indicador</h3>
-      ¿Con qué indicador se podría medir el resultado de tu propuesta?
-      <select id="indicador" name="indicador" class="form-control required" >
-         <option value="">Selecciona una opción</option>
-         <option  value='Tasa de Prevalencia de Corrupción (INEGI)'>Tasa de Prevalencia de Corrupción (INEGI)</option>
-         <option  value='Proporción de la población que se sintió satisfecha o muy satisfecha en la realización de trámites y solicitudes de servicios con alguna dependencia estatal (INEGI)'>Proporción de la población que se sintió satisfecha o muy satisfecha en la realización de trámites y solicitudes de servicios con alguna dependencia estatal (INEGI)</option>
-         <option  value='Porcentaje de trámites y servicios públicos del tipo transaccional que se ofrecen en línea en la Administración Pública Estatal (INEGI)'>Porcentaje de trámites y servicios públicos del tipo transaccional que se ofrecen en línea en la Administración Pública Estatal (INEGI)</option>
-         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población en condición de pobreza</option>
-         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por acceso a los servicios de salud</option>
-         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por rezago educativo</option>
-         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Porcentaje de población con carencia por calidad y espacios de la vivienda</option>
-         <option value='Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)'>Proporción de Nuevos Kilómetros de infraestructura carretera (estatal, federal, municipal) (INEGI/SCT)</option>
-         <option value='Proporción de alumnos en el nivel insuficiente  de competencias matemáticas y de comprensión lectora para sexto  grado de primaria y tercer año de secundaria'>Proporción de alumnos en el nivel insuficiente  de competencias matemáticas y de comprensión lectora para sexto  grado de primaria y tercer año de secundaria</option>
-         <option value='Tasa de informalidad laboral'>Tasa de informalidad laboral</option>
-         <option value='Tasa de personas de 18 años y más que considera inseguro su municipio '>Tasa de personas de 18 años y más que considera inseguro su municipio </option>
-         <option  value='Tasa de prevalencia delictiva'>Tasa de prevalencia delictiva</option>
-         <option  value='Tasa de crecimiento anual del PIB per cápita (INEGI)'>Tasa de crecimiento anual del PIB per cápita (INEGI)</option>
-         <option  value='Porcentaje de hogares con conectividad a internet (INEGI)'>Porcentaje de hogares con conectividad a internet (INEGI)</option>
-         <option  value='Porcentaje de Usuarios con acceso a internet en el Estado de Hidalgo (INEGI)'>Porcentaje de Usuarios con acceso a internet en el Estado de Hidalgo (INEGI)</option>
-         <option  value='Unidades Económicas del Sector Privado y Paraestatal que efectuaron actividades de innovación en el Estado de Hidalgo (INEGI)'>Unidades Económicas del Sector Privado y Paraestatal que efectuaron actividades de innovación en el Estado de Hidalgo (INEGI)</option>
-         <option value='Volumen tratado de aguas residuales'>Volumen tratado de aguas residuales</option>
-         <option value='Superficie de áreas naturales con acciones de conservación y/o aprovechamiento de competencia federal, estatal y municipal (INEGI)'>Superficie de áreas naturales con acciones de conservación y/o aprovechamiento de competencia federal, estatal y municipal (INEGI)</option>
-         <option value='Porcentaje de Residuos Sólidos Urbanos (RSU) y de Manejo Especial (RME) con manejo adecuado (INEGI)'>* Porcentaje de Residuos Sólidos Urbanos (RSU) y de Manejo Especial (RME) con manejo adecuado (INEGI)</option>
-     </select>
-    </label>
-    <input name="indicador2" type="text" id="nuevoindicador">
-    <br>
-    <label>
-      Nuevo indicador
-      <input id="nindicador" type="checkbox">
-    </label>
-
-
-
-  </div>
+  </div> <!-- col -->
 
 
 	</div>
@@ -259,7 +332,7 @@
 
 
 </section>
-<div class="loading"></div>
+
 {%endblock content%}
 
 {%block bliss%}

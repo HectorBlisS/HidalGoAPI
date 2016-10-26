@@ -57,7 +57,7 @@ html,body{
 }
 a:link{
 	text-decoration: none;
-	color: grey;
+	color: white;
 	link-decoration:none;
 }
 a{
@@ -67,4 +67,8 @@ a{
 }
 .bootstrap-switch{
 	max-height: 35px;
+}
+h3 i{
+	font-size: 5rem;
+	margin-right: 3rem;
 }
