@@ -3,6 +3,15 @@ html,body{
 	padding: 0;
 	background: transparent;
 }
+.loading{
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 9999;
+	background:url('https://mir-s3-cdn-cf.behance.net/project_modules/disp/585d0331234507.564a1d239ac5e.gif') center no-repeat #fff; 
+}
 .admin-panel{
 	background: black;
 	height: 100%;
@@ -55,4 +64,7 @@ a{
 	text-decoration: none;
 	color: grey;
 	link-decoration:none;
+}
+.bootstrap-switch{
+	max-height: 35px;
 }

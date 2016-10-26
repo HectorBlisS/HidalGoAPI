@@ -8,62 +8,57 @@ from projects.models import Project
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
 
+from .forms import FilesForm
 
 
 class Alta(View):
 	@method_decorator(login_required)
 	def get(self,request):
 		template_name = 'capturista/home.html'
-		projects_all = Project.objects.all().count()
 		projects = request.user.projects.all()
-		form = ProjectForm();
-		form2 = ProfileForm();
+		form = FilesForm()
 		context = {
 			'section':'alta',
-			'form':form,
-			'form2':form2,
 			'num_projects':projects.count(),
-			'num_projects_all':projects_all
-
+			'form':form
 		}
 		return render(request,template_name,context)
 
 	def post(self,request):
-		var = '';
-		form = ProjectForm(request.POST,request.FILES)
-		form2 = ProfileForm(request.POST, request.FILES)
 		projects = request.user.projects.all()
-		projects_all = Project.objects.all().count()
 		template_name = 'capturista/home.html'
-		if form.is_valid():
-			pro = form.save(commit=False)
-			pro.user = request.user
-			if pro.img:
-				pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url
-			pro.save()
-			messages.success(request,"Proyecto guardado con éxito")
-			context = {
-				'section':'alta',
-				'num_projects':projects.count(),
-				'num_projects_all':projects_all
-			}
-			
-			
-		else:
-			context = {
-			'section':'alta',
-			'form':form,
-			'form2':form2,
-			'num_projects':projects.count(),
-			'num_projects_all':projects_all
-			}
-			return render(request,template_name,context)
+		# Capturamos los datos
+		np = Project()
+		np.user = request.user
+		np.foro = request.POST.get('foro')
+		np.eje = request.POST.get('eje')
+		if request.POST.get('eje2'):
+			np.eje = request.POST.get('eje2')
+		np.problematica = request.POST.get('problematica')
+		np.alcance = request.POST.get('alcance')
+		np.municipio = request.POST.get('municipio')
+		np.title = request.POST.get('titulo')
+		np.objetivo_general = request.POST.get('objetivo')
+		np.planteamiento = request.POST.get('planteamiento')
+		np.indicador = request.POST.get('indicador')
+		if request.POST.get('indicador2'):
+			np.indicador = request.POST.get('indicador2')
+		np.save()
+		form = FilesForm(request.POST,request.FILES,instance=np)
+		form.save()
+		if np.img:
+			np.imagen = np.img.url
+		if np.anexo:
+			np.archivo = np.anexo.url
+		np.save()
 
-		if form2.is_valid():
-			perf = form2.save(commit=False)
-			perf.uid = pro.uid
-			perf.save()
-			return redirect('captura:alta')
+		context = {
+			'section':'alta',
+			'num_projects':projects.count(),
+			'guardado':True,
+			'np_id':np.id
+		}
+		return render(request,template_name,context)
 
 
 class Revisar(View):
