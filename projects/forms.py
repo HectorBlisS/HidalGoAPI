@@ -28,15 +28,30 @@ class EditProyectForm(forms.ModelForm):
 		model = Project
 		fields = [
 			'title',
-			'uid',
+			# 'uid',
+			'user',
 			'eje',
-			'img',
 			'objetivo_general',
 			'indicador',
 			'planteamiento',
 			'municipio',
 			'problematica',
+			'alcance',
+			'foro',
 			'img',
-			'imagen',
-			'anexo'
+			# 'imagen',
+			'anexo',
+			'autor_name',
+			'autor_tel',
+			'autor_correo',
+
 		]
+		labels = {
+		'title':'Titulo del proyecto',
+		'user':'Capturista del proyecto',
+		'img':'Imagen',
+		'foro':'Foro presencial',
+		'autor_name':'Nombre del autor',
+		'autel_tel':'Teléfono del autor',
+		'autor_correo':'Correo del autor'
+		}

@@ -117,4 +117,15 @@ class Lista(View):
 		'num_projects_all':num_projects_all
 		}
 		return render(request,template_name,context)
+
+class Todos(View):
+	def get(self,request):
+		projects = Project.objects.all()
+		template_name = "capturista/todos.html"
+		context = {
+		'projects':projects
+		}
+		return render(request,template_name,context)
+
+
 		

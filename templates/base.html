@@ -20,9 +20,12 @@
 <h2>PED - Sistema de captura 1.0</h2>
 
 <div style="">
-	<a href="#!" class="btn btn-lg btn-danger">Alta de Proyecto</a>
-	<a href="#!" class="btn btn-lg btn-danger">Dashboard</a>
-	<a href="#!" class="btn btn-lg btn-danger">Todos los proyectos</a>
+	<a href="{%url 'captura:alta'%}" class="btn btn-lg btn-danger">Alta de Proyecto</a>
+	<a href="{%url 'dashboard'%}" class="btn btn-lg btn-danger">Dashboard</a>
+	<a href="{%url 'captura:todos'%}" class="btn btn-lg btn-danger">Todos los proyectos</a>
+	<a class="btn btn-warning" href="{%url 'logout'%}" role="button">
+  	Cerrar Sesión
+  </a>
 	
 </div>
 

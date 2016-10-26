@@ -57,12 +57,12 @@ html,body{
 }
 a:link{
 	text-decoration: none;
-	color: white;
+	color: grey;
 	link-decoration:none;
 }
 a{
 	text-decoration: none;
-	color: grey;
+	color: lightblue;
 	link-decoration:none;
 }
 .bootstrap-switch{

@@ -1,0 +1,44 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block titulo%}Lista de proyectos{%endblock titulo%}
+
+
+{%block content%}
+
+<section class="container">
+
+<div style="" class="row well">
+
+   
+<h2>Todos los proyectos</h2>
+
+  <div class="input-group">
+  <span class="input-group-addon" id="basic-addon1">
+      <i class="fa fa-search" aria-hidden="true"></i>
+  </span>
+  <input type="text" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1">
+</div>
+
+</div>
+
+<div class="list-group">
+    {%for p in projects%}
+    <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-success">
+      {{p.title}} - {{p.uid}}
+    </a>
+  {%empty%}
+  <h2>No hay proyectos U_U</h2>
+  {%endfor%}
+
+</div>
+
+
+
+
+
+</section>
+
+{%endblock content%}
+
+
+
