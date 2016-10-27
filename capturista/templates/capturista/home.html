@@ -14,9 +14,12 @@
    <br>
 
 {%if not guardado%}
-  	<div id="save" class="btn btn-success">
+  	<div id="save" class="btn btn-warning">
   		Guardar Proyecto
   	</div>
+    <div id="publish" class="btn btn-success">
+      Publicar Proyecto
+    </div>
 {%else%}
 <a class="btn btn-lg btn-info" href="{%url 'captura:alta'%}">
   Capturar Nuevo proyecto
@@ -366,6 +369,10 @@ $('#nindicador').change(function(){
 
 $('#save').on('click',function(){
 
+  $('form').submit();
+});
+$('#publish').on('click',function(){
+  $('form').append('<input type="hidden" name="publicar" value="1"/>');
   $('form').submit();
 });
 

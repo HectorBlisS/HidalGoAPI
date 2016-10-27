@@ -20,7 +20,17 @@
     Tus proyectos dados de alta
   </a>
   {%for p in projects%}
-  <a href="{% url 'captura:editar' p.id%}" class="list-group-item">{{p.title}}</a>
+
+
+    {%if p.cerrado%}
+    <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-success">
+    {%else%}
+    <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-warning">
+      {%endif%}
+
+            {{p.title}} - {{p.user}} - {{p.fecha}}
+    </a>
+
   {%empty%}
   <div class="alert alert-warning" role="alert">
   	Aún no haz dado de alta ninguno. ¡apresurate!

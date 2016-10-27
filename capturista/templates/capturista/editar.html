@@ -10,11 +10,18 @@
 <div style="" class="row well">
 
    
-   <h2 class="col-sm-6">Edicion de proyecto <span>#{{project.id}}</span></h2>
+   <h2 class="col-sm-6">Edicion de proyecto <span>#{{project.id}}</span><span>
+<!--     {%if project.cerrado%}
+    Publicado
+    {%else%}
+    No publicado
+    {%endif%} -->
+   </span></h2>
     
    <h3 style="text-align:right" class="col-sm-6">Imprimelo: <i class="fa fa-print" aria-hidden="true"></i>
     </h3>
-    <button id="guardar" class="btn -btn-lg btn-success" type="submit">Guardar</button>
+    <button id="publish" class="btn -btn-lg btn-success" type="submit">Publicar</button>
+    <button id="guardar" class="btn -btn-lg btn-info" type="submit">Guardar</button>
     {%if perms.Project.can_delete%}
     <a href="{%url 'captura:delete' project.id%}" id="borrar" class="btn -btn-lg btn-danger" type="submit">Eliminar</a>
     {%endif%}
@@ -64,21 +71,14 @@
   $('#guardar').on('click',function(){
     $('form').submit();
   });
+
+  $('#publish').on('click',function(){
+  $('form').append('<input type="hidden" name="cerrado" value="True"/>');
+  $('form').submit();
+});
 </script>
 
-<script>
-  
-  $('#export').on('click',function(){
-    $.get('/export/37')
-    .then(function(res){
-      console.log(res)
-    })
-    .catch(function(err){
-      console.log(err)
-    });
-  });
 
-</script>
 {%endblock bliss%}
 
 

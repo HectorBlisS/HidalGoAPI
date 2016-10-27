@@ -23,7 +23,16 @@
 
 <div class="list-group">
     {%for p in projects%}
+
+    {%if p.cerrado%}
     <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-success">
+    {%else%}
+    <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-warning">
+      {%endif%}
+
+
+
+
       {{p.title}} - {{p.user}} - {{p.fecha}}
     </a>
   {%empty%}

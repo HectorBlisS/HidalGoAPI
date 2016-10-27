@@ -65,6 +65,9 @@ class Alta(View):
 			np.justi_eje = request.POST.get('justificacion_eje')
 			np.justi_indicador = request.POST.get('justificacion_indicador')
 			np.save()
+		if request.POST.get('publicar'):
+			np.cerrado = True
+			np.save()
 
 		context = {
 			'section':'alta',
@@ -73,6 +76,9 @@ class Alta(View):
 			'np_id':np.id
 		}
 		return render(request,template_name,context)
+
+
+
 
 
 class Revisar(View):
@@ -94,6 +100,9 @@ class Revisar(View):
 			if pro.img:
 				pro.imagen = "http://planestataldedesarrollo.hidalgo.gob.mx"+pro.img.url 
 			pro.save()
+			if request.POST.get('cerrado'):
+				pro.cerrado = True
+				pro.save()
 			messages.success(request,'Proyecto editado y guardado con éxito')
 			return redirect('captura:editar',id=id)
 		else:
@@ -136,14 +145,14 @@ class Borrar(View):
 		return redirect('dashboard')
 
 from projects.admin import ProjectResource
-from import_export.instance_loaders import ModelInstanceLoader
+# from import_export.instance_loaders import ModelInstanceLoader
 class Exportar(View):
 	def get(self,request,id):
-		project = get_object_or_404(Project,id=id)
+		# project = get_object_or_404(Project,id=id)
 		dataset = ProjectResource().export()
-		ejemplo = ModelInstanceLoader(project,dataset="xlsx")
-		# response = HttpResponse(dataset.xlsx,content_type='application/xlsx')
-		response = HttpResponse(ejemplo,content_type='application/xlsx')
+		# ejemplo = ModelInstanceLoader(project,dataset="xlsx")
+		response = HttpResponse(dataset.xlsx,content_type='application/xlsx')
+		# response = HttpResponse(ejemplo,content_type='application/xlsx')
 		response['Content-Disposition'] = 'attachment; filename=projecto.xlsx'
 		return response
 
