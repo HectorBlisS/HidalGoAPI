@@ -15,6 +15,10 @@ urlpatterns = [
 	# url(r'^',
 	# 	views.UsersListView.as_view(),
 	# 	name="list"),
+	url(r'^password/$',
+		views.ChangePass.as_view(),
+		name="change_password"),
+
 	url(r'^profile/$',
 		views.GetProfile.as_view(),
 		name="get_profile"),
@@ -33,7 +37,7 @@ urlpatterns = [
 
 	url(r'^$',
 		views.Dashboard.as_view(),
-		name="dashboard")
+		name="dashboard"),
 
 
 ]

@@ -4,6 +4,12 @@
 <section class="container">
 	<article class="row">
 
+    {%if perms.Project.can_delete%}
+    <a href="{%url 'change_password'%}" class="btn btn-lg btn-warning">
+      Cambiar contraseña
+    </a>
+    {%endif%}
+
 	<h1>Dashboard</h1>
 
   <div class="input-group">

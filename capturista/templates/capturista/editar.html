@@ -11,16 +11,23 @@
 
    
    <h2 class="col-sm-6">Edicion de proyecto <span>#{{project.id}}</span><span>
-<!--     {%if project.cerrado%}
+    {%if project.cerrado%}
     Publicado
     {%else%}
     No publicado
-    {%endif%} -->
+    {%endif%}
    </span></h2>
     
    <h3 style="text-align:right" class="col-sm-6">Imprimelo: <i class="fa fa-print" aria-hidden="true"></i>
     </h3>
+
+    {%if project.cerrado%}
+    <button id="notpublish" class="btn -btn-lg btn-danger" type="submit">DesPublicar</button>
+    {%else%}
     <button id="publish" class="btn -btn-lg btn-success" type="submit">Publicar</button>
+    {%endif%}
+
+
     <button id="guardar" class="btn -btn-lg btn-info" type="submit">Guardar</button>
     {%if perms.Project.can_delete%}
     <a href="{%url 'captura:delete' project.id%}" id="borrar" class="btn -btn-lg btn-danger" type="submit">Eliminar</a>
@@ -75,7 +82,13 @@
   $('#publish').on('click',function(){
   $('form').append('<input type="hidden" name="cerrado" value="True"/>');
   $('form').submit();
-});
+  });
+
+  $('#notpublish').on('click',function(){
+  $('form').append('<input type="hidden" name="abierto" value="False"/>');
+  $('form').submit();
+  });
+
 </script>
 
 

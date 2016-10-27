@@ -103,6 +103,9 @@ class Revisar(View):
 			if request.POST.get('cerrado'):
 				pro.cerrado = True
 				pro.save()
+			if request.POST.get('abierto'):
+				pro.cerrado = False
+				pro.save()
 			messages.success(request,'Proyecto editado y guardado con éxito')
 			return redirect('captura:editar',id=id)
 		else:

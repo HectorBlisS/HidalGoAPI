@@ -1,0 +1,27 @@
+{%extends 'base.html'%}
+
+{%block content%}
+
+<section class="container">
+
+	{%if error%}
+	<div class="alert alert-danger" role="alert">
+		ERROR - las contraseñas no coinciden
+	</div>
+	{%endif%}
+
+<article class="row">
+
+	<form class="col-sm-4 col-sm-offset-4"  action="." method="post">
+		{%csrf_token%}
+		<input class="form-control" type="password" name="pass1" placeholder="Escribe tu nuevo password">
+		<input class="form-control" type="password" name="pass2" placeholder="Escribelo nuevamente">
+		<input class="btn btn-primary form-control" type="submit" value="cambiar">
+	</form>
+
+</article>
+
+
+</section>
+
+{%endblock content%}

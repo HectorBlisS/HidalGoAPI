@@ -1,5 +1,5 @@
 import json
-from django.shortcuts import render, get_object_or_404, HttpResponse
+from django.shortcuts import render, get_object_or_404, HttpResponse, redirect
 from django.http import HttpResponseBadRequest
 from django.core import serializers
 from django.views.generic import View
@@ -66,6 +66,29 @@ class GetProfile(View):
 		except:
 			return HttpResponseBadRequest('No se encontró')
 
+
+
+from django.contrib.auth import logout
+from django.contrib.auth.models import User
+class ChangePass(View):
+	def get(self, request):
+		return render(request,'account/cambio.html')
+
+	def post(self,request):
+		pass1 = request.POST.get('pass1')
+		pass2 = request.POST.get('pass2')
+		user = get_object_or_404(User,id=request.user.id)
+		print(user)
+		if pass1 == pass2:
+			try:
+				user.set_password(pass2)
+				user.save()
+				logout(request)
+				return redirect('captura:alta')
+			except:
+				return render(request,'account/cambio.html',{'error':True})
+		else:
+			return render(request,'account/cambio.html',{'error':True})
 
 
 
