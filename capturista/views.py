@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
 from django.views.generic import View 
 from projects.forms import ProjectForm, EditProyectForm
 from projects.forms import ProfileForm
@@ -126,6 +126,33 @@ class Todos(View):
 		'projects':projects
 		}
 		return render(request,template_name,context)
+
+from django.contrib.admin.views.decorators import staff_member_required
+class Borrar(View):
+	@method_decorator(staff_member_required)
+	def get(self,request,id):
+		project = get_object_or_404(Project,id=id)
+		project.delete()
+		return redirect('dashboard')
+
+from projects.admin import ProjectResource
+from import_export.instance_loaders import ModelInstanceLoader
+class Exportar(View):
+	def get(self,request,id):
+		project = get_object_or_404(Project,id=id)
+		dataset = ProjectResource().export()
+		ejemplo = ModelInstanceLoader(project,dataset="xlsx")
+		# response = HttpResponse(dataset.xlsx,content_type='application/xlsx')
+		response = HttpResponse(ejemplo,content_type='application/xlsx')
+		response['Content-Disposition'] = 'attachment; filename=projecto.xlsx'
+		return response
+
+
+
+
+
+
+
 
 
 		

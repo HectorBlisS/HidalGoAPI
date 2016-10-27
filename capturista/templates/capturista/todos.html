@@ -24,7 +24,7 @@
 <div class="list-group">
     {%for p in projects%}
     <a href="{%url 'captura:editar' id=p.id%}" class="list-group-item list-group-item-success">
-      {{p.title}} - {{p.uid}}
+      {{p.title}} - {{p.user}} - {{p.fecha}}
     </a>
   {%empty%}
   <h2>No hay proyectos U_U</h2>

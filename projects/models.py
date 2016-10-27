@@ -54,6 +54,7 @@ class Project(models.Model):
 	autor_tel = models.CharField(max_length=140,blank=True,null=True)
 	autor_correo = models.CharField(max_length=140,blank=True,null=True)
 	agree = models.BooleanField(default=True)
+	fecha = models.DateTimeField(auto_now=True)
 
 
 	def __str__(self):

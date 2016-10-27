@@ -15,6 +15,10 @@
    <h3 style="text-align:right" class="col-sm-6">Imprimelo: <i class="fa fa-print" aria-hidden="true"></i>
     </h3>
     <button id="guardar" class="btn -btn-lg btn-success" type="submit">Guardar</button>
+    {%if perms.Project.can_delete%}
+    <a href="{%url 'captura:delete' project.id%}" id="borrar" class="btn -btn-lg btn-danger" type="submit">Eliminar</a>
+    {%endif%}
+    <a href="{%url 'captura:export' project.id%}" class="btn -btn-lg btn-warning" type="submit">Descargar</a>
 
 
 
@@ -60,6 +64,20 @@
   $('#guardar').on('click',function(){
     $('form').submit();
   });
+</script>
+
+<script>
+  
+  $('#export').on('click',function(){
+    $.get('/export/37')
+    .then(function(res){
+      console.log(res)
+    })
+    .catch(function(err){
+      console.log(err)
+    });
+  });
+
 </script>
 {%endblock bliss%}
 
