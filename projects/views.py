@@ -73,7 +73,7 @@ class FiltroView(View):
 		'2':'Hidalgo Próspero y Dinámico',
 		'3':'Hidalgo Humano e Igualitario',
 		'4':'Un Hidalgo Seguro con Justicia y en Paz',
-		'5':'Un Hidalgo con Desarrollo Sustentable'
+		'5':'Un Hidalgo Con Desarrollo Sustentable'
 		}
 		try:
 			projects = Project.objects.all().filter(eje=ejes[id],cerrado=True)
