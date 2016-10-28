@@ -24,7 +24,6 @@ class ProjectListView(View):
 
 	@method_decorator(ensure_csrf_cookie)
 	def get(self, request):
-		category = request.GET.get('category')
 		# paginate = request.GET.get('paginate')
 		user_id = request.GET.get('user_id')
 		if(user_id):
@@ -33,11 +32,9 @@ class ProjectListView(View):
 			use_natural_foreign_keys=True, use_natural_primary_keys=False)
 
 			return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
-		try:
-			projects = Category.objects.get(name=category).projects.all()
-		except:
+		else:
 			projects = Project.objects.all().filter(cerrado=True)
-		# if paginate:
+			# if paginate:
 		# 	projects = projects[:int(paginate)]
 
 		data = serializers.serialize('json',projects,indent=2,
@@ -65,6 +62,29 @@ class ProjectListView(View):
 			return HttpResponse('Guardado con Exito')
 		except:
 			return HttpResponseBadRequest('No se guardo')
+
+
+
+
+class FiltroView(View):
+	def get(self,request,id):
+		ejes = {
+		'1':'Gobierno Honesto Cercano y Moderno',
+		'2':'Hidalgo Próspero y Dinámico',
+		'3':'Hidalgo Humano e Igualitario',
+		'4':'Un Hidalgo Seguro con Justicia y en Paz',
+		'5':'Un Hidalgo con Desarrollo Sustentable'
+		}
+		try:
+			projects = Project.objects.all().filter(eje=ejes[id],cerrado=True)
+			data = serializers.serialize('json',projects,indent=2,
+				use_natural_foreign_keys=True, use_natural_primary_keys=False)
+			# print(category)
+			return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
+		except:
+			return HttpResponseBadRequest('No encontrado')		
+
+
 
 
 class ProjectDetailView(View):

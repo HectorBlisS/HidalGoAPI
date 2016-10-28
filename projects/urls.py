@@ -14,8 +14,12 @@ urlpatterns = [
 	url(r'^(?P<id>\d+)/$',
 		views.ProjectDetailView.as_view(),
 			name="detail"),
-#Listing and Create		
-	url(r'^',
+#Listing and Create
+	url(r'^filtro/(?P<id>\d+)/$',
+		views.FiltroView.as_view(),
+		name="filtro"),
+
+	url(r'^$',
 		views.ProjectListView.as_view(),
 			name="list"),
 
