@@ -69,7 +69,7 @@ class ProjectListView(View):
 class FiltroView(View):
 	def get(self,request,id):
 		ejes = {
-		'1':'Gobierno Honesto Cercano y Moderno',
+		'1':'Gobierno Honesto, Cercano y Moderno',
 		'2':'Hidalgo Próspero y Dinámico',
 		'3':'Hidalgo Humano e Igualitario',
 		'4':'Un Hidalgo Seguro con Justicia y en Paz',
