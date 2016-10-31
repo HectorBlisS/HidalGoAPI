@@ -4,6 +4,11 @@ from . import views
 
 urlpatterns = [
 
+#listing the count of totals
+
+	url(r'^totales/$',
+		views.Cuentas.as_view(),
+		name="totales"),
 
 #Listing adn Create Category
 	url(r'^categories/$',

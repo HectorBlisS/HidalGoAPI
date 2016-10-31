@@ -176,6 +176,16 @@ class Reviews(View):
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 		
 
+class Cuentas(View):
+	def get(self,request):
+		cuentas = {
+		'proyectos':Project.objects.all().count(),
+		'publicados':Project.objects.all().filter(cerrado=True).count(),
+		'participantes':Project.objects.all().count()+60,
+		}
+		data = json.dumps(cuentas)
+
+		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
 
 
