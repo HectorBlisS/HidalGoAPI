@@ -43,7 +43,7 @@ class Project(models.Model):
 	municipio = models.CharField(max_length=140,blank=True,null=True)
 	alcance = models.CharField(max_length=140,blank=True,null=True)
 	votes = models.IntegerField(default=0)
-	categories = models.ManyToManyField(Category,related_name='projects',blank=True,null=True)
+	categories = models.ManyToManyField(Category,related_name='projects')
 	anexo = models.FileField(blank=True,null=True)
 	cerrado = models.BooleanField(default=False)
 	anexo = models.FileField(blank=True,null=True )
