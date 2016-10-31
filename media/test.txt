@@ -1,0 +1,6 @@
+no regresa de twitter
+crea proyecto por defecto
+se queda guardando proyecto
+te marca 100% aunque no tenga imagen ni documento
+no filtra los ejes
+esta pegado el video
