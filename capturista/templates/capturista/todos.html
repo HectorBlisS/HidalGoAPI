@@ -12,20 +12,8 @@
    
   <h2>Todos los proyectos</h2>
 
-  <div class="col-xs-12">
-    <button class="btn btn-success" type="button">
-      Proyectos Publicados: <span class="badge">{{published}}</span>
-    </button>
-    <button class="btn btn-warning" type="button">
-      Proyectos Incompletos: <span class="badge">{{incomplete}}</span>
-    </button>
-    <button class="btn btn-primary" type="button">
-      Proyectos Totales: <span class="badge">{{totalp}}</span>
-    </button>
-
-      <a href="{%url 'captura:export' 1%}" class="btn -btn-lg btn-info" type="submit">Descargar</a>
-
-  </div>
+  <a href="{%url 'captura:export' 1%}" class="btn -btn-lg btn-info" type="submit">Descargar</a>
+ 
 
   <!-- <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">
@@ -41,7 +29,9 @@
 
 </div>
 
-<div class="list-group">
+<article class="row">
+
+<div class="col-sm-8 list-group">
     {%for p in projects%}
 
     {%if p.cerrado%}
@@ -61,6 +51,38 @@
 
 </div>
 
+ <div class="col-sm-4">
+    <button class="btn btn-success" type="button">
+      Publicados: <span class="badge">{{published}}</span>
+    </button>
+    <button class="btn btn-warning" type="button">
+      Incompletos: <span class="badge">{{incomplete}}</span>
+    </button>
+    <button class="btn btn-primary" type="button">
+      Proyectos Totales: <span class="badge">{{totalp}}</span>
+    </button>
+    <!-- por eje -->
+    <button class="btn btn-info" type="button">
+      Gobierno Honesto, Cercano y Moderno: <span class="badge">{{ejes.ghcm}}</span>
+    </button>
+    <button class="btn btn-info" type="button">
+      Hidalgo Próspero y Dinámico: <span class="badge">{{ejes.hpd}}</span>
+    </button>
+    <button class="btn btn-info" type="button">
+      Hidalgo Humano e Igualitario: <span class="badge">{{ejes.hhi}}</span>
+    </button>
+    <button class="btn btn-info" type="button">
+      Un Hidalgo Seguro con Justicia y en Paz: <span class="badge">{{ejes.hsjp}}</span>
+    </button>
+    <button class="btn btn-info" type="button">
+      Un Hidalgo Con Desarrollo Sustentable: <span class="badge">{{ejes.hds}}</span>
+    </button>
+
+      
+
+  </div>
+
+</article>
 
 
 

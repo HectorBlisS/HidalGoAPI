@@ -134,12 +134,27 @@ class Lista(View):
 class Todos(View):
 	def get(self,request):
 		projects = Project.objects.all()
+		ejes = {
+		'1':'Gobierno Honesto, Cercano y Moderno',
+		'2':'Hidalgo Próspero y Dinámico',
+		'3':'Hidalgo Humano e Igualitario',
+		'4':'Un Hidalgo Seguro con Justicia y en Paz',
+		'5':'Un Hidalgo Con Desarrollo Sustentable'
+		}
+		cuenta_ejes = {
+		'ghcm':Project.objects.all().filter(eje=ejes['1']).count(),
+		'hpd':Project.objects.all().filter(eje=ejes['2']).count(),
+		'hhi':Project.objects.all().filter(eje=ejes['3']).count(),
+		'hsjp':Project.objects.all().filter(eje=ejes['4']).count(),
+		'hds':Project.objects.all().filter(eje=ejes['5']).count()
+		}
 		template_name = "capturista/todos.html"
 		context = {
 		'projects':projects,
 		'published':Project.objects.all().filter(cerrado=True).count(),
 		'incomplete':Project.objects.all().filter(cerrado=False).count(),
-		'totalp':Project.objects.all().count()
+		'totalp':Project.objects.all().count(),
+		'ejes':cuenta_ejes
 		}
 		return render(request,template_name,context)
 
