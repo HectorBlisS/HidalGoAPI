@@ -170,9 +170,9 @@ class Exportar(View):
 		# project = get_object_or_404(Project,id=id)
 		dataset = ProjectResource().export()
 		# ejemplo = ModelInstanceLoader(project,dataset="xlsx")
-		response = HttpResponse(dataset.xlsx,content_type='application/xlsx')
+		response = HttpResponse(dataset.csv,content_type='application/csv')
 		# response = HttpResponse(ejemplo,content_type='application/xlsx')
-		response['Content-Disposition'] = 'attachment; filename=projecto.xlsx'
+		response['Content-Disposition'] = 'attachment; filename=projectos.csv'
 		return response
 
 
