@@ -141,6 +141,14 @@ class Todos(View):
 		'4':'Un Hidalgo Seguro con Justicia y en Paz',
 		'5':'Un Hidalgo Con Desarrollo Sustentable'
 		}
+		foros = {
+			'1':'No',
+			'2':'Huejutla',
+			'3':'Pachuca',
+			'4':'Tulancingo',
+			'5':'Ixmiquilpan',
+			'6':'Tula'
+		}
 		cuenta_ejes = {
 		'ghcm':Project.objects.all().filter(eje=ejes['1']).count(),
 		'hpd':Project.objects.all().filter(eje=ejes['2']).count(),
@@ -148,13 +156,22 @@ class Todos(View):
 		'hsjp':Project.objects.all().filter(eje=ejes['4']).count(),
 		'hds':Project.objects.all().filter(eje=ejes['5']).count()
 		}
+		cuenta_foros = {
+		'Online':Project.objects.all().filter(foro="").count(),
+		'Huejutla':Project.objects.all().filter(foro=foros['2']).count(),
+		'Pachuca':Project.objects.all().filter(foro=foros['3']).count(),
+		'Tulancingo':Project.objects.all().filter(foro=foros['4']).count(),
+		'Ixmiquilpan':Project.objects.all().filter(foro=foros['5']).count(),
+		'Tula':Project.objects.all().filter(foro=foros['6']).count()
+		}
 		template_name = "capturista/todos.html"
 		context = {
 		'projects':projects,
 		'published':Project.objects.all().filter(cerrado=True).count(),
 		'incomplete':Project.objects.all().filter(cerrado=False).count(),
 		'totalp':Project.objects.all().count(),
-		'ejes':cuenta_ejes
+		'ejes':cuenta_ejes,
+		'foros':cuenta_foros
 		}
 		return render(request,template_name,context)
 
