@@ -10,14 +10,30 @@
 <div style="" class="row well">
 
    
-<h2>Todos los proyectos</h2>
+  <h2>Todos los proyectos</h2>
 
-  <div class="input-group">
+  <div class="col-xs-12">
+    <button class="btn btn-success" type="button">
+      Proyectos Publicados: <span class="badge">{{published}}</span>
+    </button>
+    <button class="btn btn-warning" type="button">
+      Proyectos Incompletos: <span class="badge">{{incomplete}}</span>
+    </button>
+    <button class="btn btn-primary" type="button">
+      Proyectos Totales: <span class="badge">{{totalp}}</span>
+    </button>
+  </div>
+  <!-- <div class="input-group">
   <span class="input-group-addon" id="basic-addon1">
       <i class="fa fa-search" aria-hidden="true"></i>
   </span>
   <input type="text" class="form-control" placeholder="Buscar" aria-describedby="basic-addon1">
-</div>
+  </div> -->
+
+  <form style="display:none" action="." method="post">
+    {%csrf_token%}
+    <input type="submit" value="Match">
+  </form>
 
 </div>
 

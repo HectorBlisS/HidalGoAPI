@@ -4,6 +4,7 @@ from projects.forms import ProjectForm, EditProyectForm
 from projects.forms import ProfileForm
 from django.contrib import messages
 from projects.models import Project
+from account.models import Profile
 
 from django.utils.decorators import method_decorator
 from django.contrib.auth.decorators import login_required
@@ -135,9 +136,24 @@ class Todos(View):
 		projects = Project.objects.all()
 		template_name = "capturista/todos.html"
 		context = {
-		'projects':projects
+		'projects':projects,
+		'published':Project.objects.all().filter(cerrado=True).count(),
+		'incomplete':Project.objects.all().filter(cerrado=False).count(),
+		'totalp':Project.objects.all().count()
 		}
 		return render(request,template_name,context)
+
+	def post(self, request):
+		perfiles = Profile.objects.all()
+		proyectos = Project.objects.all()
+		for proyecto in proyectos:
+			for perfil in perfiles:
+				if proyecto.uid == perfil.uid:
+					proyecto.autor_name = perfil.name
+					proyecto.autor_correo = perfil.email
+					proyecto.autor_tel = perfil.telefono
+					proyecto.save()
+		return HttpResponse('Terminé')
 
 from django.contrib.admin.views.decorators import staff_member_required
 class Borrar(View):
