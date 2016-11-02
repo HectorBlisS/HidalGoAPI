@@ -18,8 +18,10 @@
     {%endif%}
    </span></h2>
     
+    <div id="imprimelo">
    <h3 style="text-align:right" class="col-sm-6">Imprimelo: <i class="fa fa-print" aria-hidden="true"></i>
     </h3>
+    </div>
 
     {%if project.cerrado%}
     <button id="notpublish" class="btn -btn-lg btn-danger" type="submit">DesPublicar</button>
@@ -90,6 +92,11 @@
 
 </script>
 
+<script>
+  $('#imprimelo').on('click',function(){
+    window.print();
+  })
+</script>
 
 {%endblock bliss%}
 
