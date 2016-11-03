@@ -11,6 +11,8 @@ from django.contrib.auth.decorators import login_required
 
 from .forms import FilesForm
 
+from django.contrib.admin.views.decorators import staff_member_required
+
 
 class Alta(View):
 	@method_decorator(login_required)
@@ -50,6 +52,7 @@ class Alta(View):
 		np.autor_tel = request.POST.get('autor_tel')
 		np.autor_correo = request.POST.get('autor_correo')
 		np.agree = request.POST.get('agree')
+		np.conclusiones = request.POST.get('conclusiones')
 
 		if request.POST.get('indicador2'):
 			np.indicador = request.POST.get('indicador2')
@@ -83,6 +86,7 @@ class Alta(View):
 
 
 class Revisar(View):
+	@method_decorator(staff_member_required)
 	def get(self,request,id):
 		project = get_object_or_404(Project,id=id)
 		form = EditProyectForm(instance=project)

@@ -6,7 +6,7 @@ from account.models import Profile
 class ProjectForm(forms.ModelForm):
 	class Meta:
 		model = Project
-		fields = ['title','uid','eje','img','objetivo_general','indicador','planteamiento','municipio','problematica','imagen','laRef','anexo','fileRef','cerrado','alcance','foro']
+		fields = ['title','uid','eje','img','objetivo_general','indicador','planteamiento','municipio','problematica','imagen','laRef','anexo','fileRef','cerrado','alcance','foro','conclusiones']
 
 
 class ProfileForm(forms.ModelForm):
@@ -44,6 +44,7 @@ class EditProyectForm(forms.ModelForm):
 			'autor_name',
 			'autor_tel',
 			'autor_correo',
+			'conclusiones'
 
 		]
 		labels = {
