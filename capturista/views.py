@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect,get_object_or_404,HttpResponse
 from django.views.generic import View 
 from projects.forms import ProjectForm, EditProyectForm
-from projects.forms import ProfileForm
+from projects.forms import ProfileForm, ConclusionForm
 from django.contrib import messages
-from projects.models import Project
+from projects.models import Project, Conclusion
 from account.models import Profile
 
 from django.utils.decorators import method_decorator
@@ -208,9 +208,36 @@ class Exportar(View):
 		# ejemplo = ModelInstanceLoader(project,dataset="xlsx")
 		response = HttpResponse(dataset.csv,content_type='application/csv')
 		# response = HttpResponse(ejemplo,content_type='application/xlsx')
-		response['Content-Disposition'] = 'attachment; filename=projectos.csv'
+		response['Content-Disposition'] = 'attachment; filename=proyectos.csv'
 		return response
 
+
+class Conclusiones(View):
+	def get(self,request):
+		form  = ConclusionForm()
+		conc = Conclusion.objects.all()
+		template_name = 'capturista/conclusion.html'
+		context = {
+			'form':form,
+			'conclusiones':conc
+		}
+		return render(request,template_name,context)
+
+	def post(self,request):
+		form = ConclusionForm(request.POST)
+		if form.is_valid():
+			form.save()
+			messages.success(request,'Tu conclusión se ha guardado con éxito. GRACIAS.')
+			return redirect('captura:conclusiones')
+
+from projects.admin import ConclusionResource
+class ConcExport(View):
+	def get(self,request):
+		#Exportar el modelo
+		dataset = ConclusionResource().export()
+		response = HttpResponse(dataset.csv,content_type='application/csv')
+		response['Content-Disposition'] = 'attachment; filename=conclusiones.csv'
+		return response
 
 
 

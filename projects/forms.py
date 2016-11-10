@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project
+from .models import Project, Conclusion
 from account.models import Profile
 
 
@@ -55,4 +55,21 @@ class EditProyectForm(forms.ModelForm):
 		'autor_name':'Nombre del autor',
 		'autel_tel':'Teléfono del autor',
 		'autor_correo':'Correo del autor'
+		}
+
+
+class ConclusionForm(forms.ModelForm):
+	class Meta:
+		model = Conclusion
+		fields = [
+			'nombre',
+			'foro',
+			'otro',
+			'conclusion'
+		]
+		labels = {
+		'nombre':'Nombre completo de quien redacta la conclusión',
+		'foro':'Selecciona el foro al que corresponde la conclusión',
+		'otro':'Escribe el nombre del nuevo foro si es el caso',
+		'conclusion':'Escribe tus conclusiones'
 		}

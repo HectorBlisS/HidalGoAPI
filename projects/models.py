@@ -79,6 +79,24 @@ class Comment(models.Model):
 		return "{} review {}".format(self.user,self.project)
 
 
+class Conclusion(models.Model):
+	FOROS = (
+		('Tula de Allende','Tula de Allende'),
+		('Tulancingo','Tulancingo'),
+		('Huejutla','Huejutla'),
+		('Ixmiquilpan','Ixmiquilpan'),
+		('Pachuca','Pachuca'),
+		('Otro','Otro'))
+	nombre = models.CharField(max_length=140)
+	foro = models.CharField(max_length=140,choices=FOROS)
+	otro = models.CharField(max_length=140,blank=True,null=True)
+	conclusion = models.TextField(blank=True,null=True)
+	fecha = models.DateTimeField(auto_now=True)
+
+	def __str__(self):
+		return "Conclusion en foro {}".format(self.foro)
+
+
 
 
 

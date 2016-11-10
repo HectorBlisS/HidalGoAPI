@@ -1,0 +1,90 @@
+{%extends 'base.html'%}
+{%load static%}
+{%block titulo%}Edicion de proyectos{%endblock titulo%}
+
+
+{%block content%}
+
+<section class="container">
+
+<div style="" class="row well">
+
+   
+   <h2 class="col-sm-6">Redactar Conclusiones</h2>
+   <h2>
+   <a style="color:white" class="btn btn-warning" href="{%url 'captura:export_conclusiones'%}">Descargar</a>
+   </h2>
+
+
+</div>
+
+<article class="row well">
+
+  <form action="." method="post">
+    {%csrf_token%}
+    {{form.as_p}}
+    <input class="btn btn-success" type="submit" value="Guardar">
+  </form>
+
+</article>
+
+<div class="conclusiones row">
+
+{%for con in conclusiones%}
+
+<div class="panel panel-default col-sm-4">
+  <div class="panel-heading">
+    <h3 class="panel-title">{{con.foro}} {{con.otro}}-- {{con.nombre}}</h3>
+  </div>
+  <div class="panel-body">
+    {{con.conclusion}}
+  </div>
+</div>
+
+{%endfor%}
+
+
+</div>
+
+</section>
+
+{%endblock content%}
+{%block bliss%}
+<script>
+
+  
+  $('input').addClass('form-control');
+  $('textarea').addClass('form-control');
+
+  $('#id_otro').parent().hide();
+  $('#id_foro').change(function(){
+    if ($('#id_foro').val() === 'Otro'){
+      console.log('si es');
+      console.log($('#id_foro').val());
+      $('#id_otro').parent().fadeIn();
+    }else{
+      $('#id_otro').parent().fadeOut();
+    }
+  });
+
+
+
+
+// $('#id_otro').hide();
+// $('#id_foro').change(function(){
+//   if (this.checked){
+//     $('#indicador').hide();
+//     $('#nuevoindicador').show('slow');
+//     $('#nuevoindicador').val($('#indicador').val())
+//   }else{
+//     $('#indicador').show('slow');
+//     $('#nuevoindicador').hide();
+//   }
+// });
+
+</script>
+
+{%endblock bliss%}
+
+
+

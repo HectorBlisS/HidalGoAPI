@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project,Comment,Category
+from .models import Project,Comment,Category, Conclusion
 
 # import export
 from import_export import resources
@@ -19,6 +19,10 @@ class ProjectResource(resources.ModelResource):
 	class Meta:
 		model = Project
 
+class ConclusionResource(resources.ModelResource):
+	class Meta:
+		model = Conclusion
+
 # class ProjectAdmin(ImportExportModelAdmin):
 # 	# resource_class = ProjectResource
 # 	pass
@@ -28,4 +32,5 @@ class ProjectResource(resources.ModelResource):
 admin.site.register(Project, ProjectAdmin)
 admin.site.register(Comment)
 admin.site.register(Category)
+admin.site.register(Conclusion)
 
