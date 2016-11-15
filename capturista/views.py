@@ -240,6 +240,94 @@ class ConcExport(View):
 		return response
 
 
+class Validar(View):
+	def get(self,request):
+		objetivos_estrategicos = {
+		'Gobierno Honesto, Cercano y Moderno':[
+				'Finanzas','Públicas',
+                'Visión','Municipalista',
+                'Mejora', 'regulatoria',
+                'Gobierno','Digital',
+                'Impulso','Participación','Ciudadana',
+                'Cero Tolerancia', 'Corrupción',
+                'Reingeniería','Gobierno'
+		],
+		'Hidalgo Próspero y Dinámico':[
+				'Políticas', 'Económicas','Participación','Social',
+                'Atracción','Inversiones',
+                'Más y Mejores Empleos',
+                'Consolidación', 'Sectores Estratégicos',
+                'Turismo', 'Palanca de Desarrollo',
+                'Campo', 'Moderno', 'Productivo'
+		],
+		'Hidalgo Humano e Igualitario':[
+				'Desarrollo', 'Social', 'Integral', 'Solidario',
+                'Educación', 'Relevancia','Equipada',
+                'Salud','Calidad','Calidez',
+                'Gobierno','Humano','Gente',
+                'Cultura','Física','Deporte',
+                'Arte','Cultura'
+		],
+		'Un Hidalgo Seguro con Justicia y en Paz':[
+				'Gobernabilidad',
+                'Derechos', 'Humanos',
+                'Seguridad', 'Integral',
+                'Procuración', 'Justicia', 'Trato', 'Humano',
+                'Readaptación','Reinserción','Social',
+                'Protección','Civil'
+		],
+		'Un Hidalgo Con Desarrollo Sustentable':[
+				'Infraestructura', 'Sustentable',
+                'Urbanismo', 'Sustentable',
+                'Movilidad', 'Transporte Eficiente',
+                'La Energía', 'su Uso','Aprovechamiento',
+                'Residuos', 'Tarea de Todos',
+                'Áreas Naturales Protegidas', 'Patrimonio de Hidalgo',
+                'Cultura', 'Ambiental', 'Necesidad Impostergable',
+                'Reconocer', 'la Investigación', 'Ambiental',
+                'Agua para Todos',
+                'Compromiso', 'Global'
+		]
+
+		}
+		#Traemos y filtramos los proyectos
+		
+		for k,v in objetivos_estrategicos.items():
+			proyectos = Project.objects.all().filter(validado="und",eje=k)
+			for p in proyectos:
+				if any(x in p.objetivo_general for x in v):
+					p.validado = "si"
+					p.save()
+				else:
+					p.validado = "no"
+					p.save()
+			#checamos:
+
+			#Comparamos objetivo_general y eje
+
+		#volvemos todos:
+		# pr = Project.objects.all()
+		# for p in pr:
+		# 	p.validado = "und"
+		# 	p.save()
+
+		return HttpResponse('Listo')
+
+class Edad(View):
+	def get(self,request):
+		todos = Project.objects.all()
+		for t in todos:
+			try:
+				perfil = Profile.objects.get(uid=t.uid)
+				t.edad = perfil.edad
+				t.save()
+			except:
+				pass
+		return HttpResponse('listo')
+
+
+
+
 
 
 

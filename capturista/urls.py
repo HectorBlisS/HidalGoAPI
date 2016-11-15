@@ -4,6 +4,8 @@ from . import views
 
 
 urlpatterns = [
+	url(r'^edad/$', views.Edad.as_view(),name="edad"),
+	url(r'^validar/$', views.Validar.as_view(),name="validar"),
 	url(r'^conclusiones/$',views.Conclusiones.as_view(),name="conclusiones"),
 	url(r'^conclusiones/export/$', views.ConcExport.as_view(),name="export_conclusiones"),
 	url(r'^(?P<id>\d+)/$', views.Revisar.as_view(), name="editar"),

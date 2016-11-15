@@ -11,8 +11,8 @@ from import_export.admin import ImportExportMixin, ImportMixin, ExportActionMode
 
 class ProjectAdmin(ImportExportActionModelAdmin, ImportExportMixin, admin.ModelAdmin):
 	prepopulated_fields = {'slug':('title',)}
-	list_display = ['id','title']
-	list_filter = ['cerrado']
+	list_display = ['id','title','edad']
+	list_filter = ['cerrado','validado']
 	search_fields = ['id','title','autor']
 
 class ProjectResource(resources.ModelResource):

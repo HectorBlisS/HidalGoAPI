@@ -26,6 +26,10 @@ class Category(models.Model):
 
 class Project(models.Model):
 	""" Modelo para Proyecto en Base de datos """
+	VALIDACION = (("si","SI"),("no","NO"),("und","und"))
+
+
+
 	title = models.CharField(max_length=140)
 	uid = models.CharField(max_length=140,blank=True,null=True)
 	eje = models.CharField(max_length=140,null=True,blank=True)
@@ -56,7 +60,8 @@ class Project(models.Model):
 	agree = models.BooleanField(default=True)
 	fecha = models.DateTimeField(auto_now=True)
 	conclusiones = models.TextField(blank=True,null=True)
-
+	validado = models.CharField(max_length=10,choices=VALIDACION,default="und")
+	edad = models.CharField(max_length=140 ,blank=True,null=True)
 
 	def __str__(self):
 		return self.title
