@@ -12,7 +12,7 @@ from import_export.admin import ImportExportMixin, ImportMixin, ExportActionMode
 class ProjectAdmin(ImportExportActionModelAdmin, ImportExportMixin, admin.ModelAdmin):
 	prepopulated_fields = {'slug':('title',)}
 	list_display = ['id','title','edad']
-	list_filter = ['cerrado','validado']
+	list_filter = ['cerrado','validado','edad']
 	search_fields = ['id','title','autor']
 
 class ProjectResource(resources.ModelResource):
