@@ -3,6 +3,11 @@ from . import views
 
 
 urlpatterns = [
+#Niños
+	url(r'^ninos/$',
+		views.Ninos.as_view(),
+		name="ninos"),
+#niños detalle
 
 #listing the count of totals
 

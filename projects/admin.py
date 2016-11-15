@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Project,Comment,Category, Conclusion
+from .models import Project,Comment,Category, Conclusion, KidProject
 
 # import export
 from import_export import resources
@@ -33,4 +33,5 @@ admin.site.register(Project, ProjectAdmin)
 admin.site.register(Comment)
 admin.site.register(Category)
 admin.site.register(Conclusion)
+admin.site.register(KidProject)
 

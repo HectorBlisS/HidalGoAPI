@@ -1,5 +1,5 @@
 from django import forms
-from .models import Project, Conclusion
+from .models import Project, Conclusion, KidProject
 from account.models import Profile
 
 
@@ -73,3 +73,16 @@ class ConclusionForm(forms.ModelForm):
 		'otro':'Escribe el nombre del nuevo foro si es el caso',
 		'conclusion':'Escribe tus conclusiones'
 		}
+
+
+class NinosForm(forms.ModelForm):
+	class Meta:
+		model = KidProject
+		fields = [
+			'nombre',
+			'edad',
+			'img',
+			'titulo',
+			'problematica',
+			'email'
+		]

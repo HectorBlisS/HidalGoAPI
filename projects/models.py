@@ -101,7 +101,16 @@ class Conclusion(models.Model):
 	def __str__(self):
 		return "Conclusion en foro {}".format(self.foro)
 
+class KidProject(models.Model):
+	nombre = models.CharField(max_length=140,blank=True,null=True)
+	edad = models.CharField(max_length=140,blank=True,null=True)
+	img = models.ImageField(blank=True,null=True)
+	imagen = models.CharField(max_length=500,blank=True,null=True)
+	titulo = models.CharField(max_length=140,blank=True,null=True)
+	problematica = models.CharField(max_length=140,blank=True,null=True)
+	email = models.CharField(max_length=140,blank=True,null=True)
 
-
+	def __str__(self):
+		return self.titulo
 
 

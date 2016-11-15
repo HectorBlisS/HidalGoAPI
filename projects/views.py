@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, HttpResponse
 from django.http import HttpResponseBadRequest
-from .models import Project,Category
+from .models import Project,Category, KidProject
 from django.core import serializers
 from django.views.generic import View
 from django.utils.text import slugify
@@ -15,7 +15,7 @@ import json
 # from django.forms.models import model_to_dict
 
 
-from .forms import ProjectForm
+from .forms import ProjectForm, NinosForm
 
 class ProjectListView(View):
 	@method_decorator(csrf_exempt)
@@ -187,9 +187,31 @@ class Cuentas(View):
 
 		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
+# Niños
+class Ninos(View):
+	@method_decorator(csrf_exempt)
+	def dispatch(self, request, *args, **kwargs):
+		return super(Ninos, self).dispatch(request, *args, **kwargs)
 
+	def get(self,request):
+		projects = KidProject.objects.all()
 
+		data = serializers.serialize('json',projects,indent=2,
+			use_natural_foreign_keys=True, use_natural_primary_keys=False)
+		return HttpResponse(data,content_type = 'application/javascript; charset=utf8')
 
+	def post(self,request):
+		try:
+
+			form = NinosForm(request.POST,request.FILES)
+			if form.is_valid():
+				np = form.save(commit=False)
+				np.save()
+				np.imagen = 'http://planestataldedesarrollo.hidalgo.gob.mx:8000'+str(np.img.url)
+				np.save()
+			return HttpResponse('Guardado con Exito')
+		except:
+			return HttpResponseBadRequest('No se guardo')
 
 
 
